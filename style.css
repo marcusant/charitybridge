@@ -66,6 +66,103 @@
   --radius-full: 9999px;
 }
 
+/* ==========================================================================
+   Modo Escuro (Sleek Dark Mode Auto-Detection)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #090d16; /* Midnight Slate */
+    --bg-card: rgba(15, 23, 42, 0.85); /* Slate 900 transparent */
+    --bg-header-start: #020617; /* Darkest Slate */
+    --bg-header-end: #0f172a;
+    
+    --color-text-main: #f8fafc;
+    --color-text-muted: #94a3b8; /* Slate 400 */
+    --color-text-dark: #cbd5e1; /* Slate 300 */
+    
+    --border-color: rgba(255, 255, 255, 0.08);
+    --bg-input: #1e293b; /* Slate 800 */
+    --border-color-focus: #60a5fa;
+    
+    /* Shadows */
+    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    
+    /* Urgências em Dark Mode - Luminescentes para alto contraste */
+    --color-success-bg: rgba(22, 163, 74, 0.1);
+    --color-success-border: rgba(22, 163, 74, 0.25);
+    --color-success-text: #4ade80; /* Green 400 */
+    
+    --color-warning-bg: rgba(217, 119, 6, 0.1);
+    --color-warning-border: rgba(217, 119, 6, 0.25);
+    --color-warning-text: #fbbf24; /* Amber 400 */
+    
+    --color-danger-bg: rgba(220, 38, 38, 0.1);
+    --color-danger-border: rgba(220, 38, 38, 0.25);
+    --color-danger-text: #f87171; /* Red 400 */
+    
+    --color-critical-bg: rgba(147, 51, 234, 0.1);
+    --color-critical-border: rgba(147, 51, 234, 0.25);
+    --color-critical-text: #c084fc; /* Purple 400 */
+  }
+
+  /* Dark Mode element styling */
+  input, select, textarea {
+    color: white;
+  }
+  
+  .filter-btn {
+    background: #0f172a !important;
+    color: var(--color-text-dark) !important;
+    border-color: var(--border-color) !important;
+  }
+  
+  .filter-btn.active {
+    background: var(--color-primary) !important;
+    color: white !important;
+    border-color: var(--color-primary) !important;
+  }
+  
+  .ticket-feed-card {
+    background: rgba(15, 23, 42, 0.6) !important;
+  }
+  
+  .ticket-feed-card.active {
+    background: rgba(59, 130, 246, 0.12) !important;
+    border-color: var(--color-primary) !important;
+  }
+  
+  .flowchart-node {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+  }
+  
+  .detail-contact-box {
+    background: rgba(30, 41, 59, 0.5) !important;
+  }
+  
+  .info-block {
+    background: rgba(30, 41, 59, 0.5) !important;
+  }
+  
+  .selfhelp-block {
+    background: rgba(30, 41, 59, 0.5) !important;
+  }
+  
+  .ticket-block {
+    background: rgba(15, 23, 42, 0.6) !important;
+  }
+  
+  .resource-card {
+    background: #0f172a !important;
+    border-color: var(--border-color) !important;
+  }
+  
+  .presentation-col-card {
+    background: rgba(15, 23, 42, 0.6) !important;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -74,11 +171,17 @@
 
 body {
   font-family: var(--font-family-body);
-  background: var(--bg-primary);
+  background: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(34, 197, 94, 0.04) 0px, transparent 50%),
+    var(--bg-primary);
+  background-attachment: fixed;
   color: var(--color-text-main);
   min-height: 100vh;
   line-height: 1.5;
 }
+
 
 header {
   background: linear-gradient(135deg, var(--bg-header-start) 0%, var(--bg-header-end) 100%);
@@ -116,10 +219,12 @@ header p {
 
 .card {
   background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
   padding: 40px;
   box-shadow: var(--shadow-premium);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .card-title {
@@ -1009,8 +1114,10 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
 }
 
 .detail-card {
-  background: white;
-  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: var(--radius-lg);
   padding: 32px;
   box-shadow: var(--shadow-premium);
@@ -1373,8 +1480,10 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
 }
 
 .splash-card {
-  background: white;
-  border: 1.5px solid var(--border-color);
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: var(--radius-lg);
   padding: 36px 24px;
   text-align: center;
