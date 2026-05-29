@@ -189,7 +189,7 @@ const initialMockTickets = [
 ];
 
 // ==========================================================================
-// 2. Shared Helper Functions & Local Storage Sincronization
+// 2. Shared Helper Functions & Local Storage Synchronization
 // ==========================================================================
 
 function getStoredTickets() {
@@ -220,7 +220,7 @@ function getInitials(name) {
 // 3. NGO Support Portal - Specific Logic
 // ==========================================================================
 
-// Preenche dados de teste para demonstração e limpa erros
+// Fills in test data for demonstration and clears errors
 function fillDemoData() {
   const charityNameEl = document.getElementById("charity-name");
   const problemEl = document.getElementById("problem");
@@ -234,7 +234,7 @@ function fillDemoData() {
   if (emailEl) emailEl.value = "contact@greenfuture.org";
   if (urgencyEl) urgencyEl.checked = true;
 
-  // Limpar estados de validação
+  // Clear validation states
   const fields = ["charity-name", "problem"];
   fields.forEach(fieldId => {
     const el = document.getElementById(fieldId);
@@ -255,7 +255,7 @@ function fillDemoData() {
   }
 }
 
-// Classificador Dinâmico baseado em Palavras-chave (Simulação de IA local)
+// Dynamic Keyword-Based Classifier (Local AI Simulation)
 function classifyIssueTypeByContent(text) {
   const t = text.toLowerCase();
   
@@ -278,7 +278,7 @@ function classifyIssueTypeByContent(text) {
   return "default";
 }
 
-// Analisa a requisição da ONG e gera diagnóstico
+// Analyzes the NGO request and generates a diagnosis
 function analyzeRequest() {
   const charityNameEl = document.getElementById("charity-name");
   const problemEl = document.getElementById("problem");
@@ -354,7 +354,7 @@ function analyzeRequest() {
     const rawIssueType = document.getElementById("issue-type").value;
     const problemText = problemEl.value.trim();
     
-    // Classificação semântica inteligente caso esteja configurada como "Decidir por IA"
+    // Intelligent semantic classification if configured to "Let AI Decide"
     const issueType = rawIssueType || classifyIssueTypeByContent(problemText);
     const urgency = urgencyRadio.value;
     const data = scenarios[issueType] || scenarios["default"];
@@ -406,7 +406,7 @@ function analyzeRequest() {
 
       document.getElementById("ticket-section").style.display = "block";
 
-      // PERSISTÊNCIA LOCAL (Tarefa 4.3): Salvar o ticket no localStorage para sincronizar com voluntários
+      // LOCAL PERSISTENCE (Task 4.3): Save the ticket in localStorage to synchronize with volunteers
       const countryText = countryEl.options[countryEl.selectedIndex].text;
       const newTicket = {
         id: newTicketId,
@@ -500,7 +500,7 @@ document.addEventListener("DOMContentLoaded", () => {
 let currentCategory = "all";
 let activeTicketId = null;
 
-// Popula o feed de tickets do voluntário
+// Populates the volunteer ticket feed
 function renderTicketFeed() {
   const feedContainer = document.getElementById("ticket-feed-container");
   if (!feedContainer) return; // Not on volunteer portal page
@@ -663,7 +663,7 @@ function claimTicket(id) {
   selectTicket(id);
   renderTicketFeed();
   
-  // Actualizar também a estatística de claims no topo!
+  // Also update the active claims statistic at the top!
   const claimedCount = currentTickets.filter(t => t.status === "Claimed").length;
   const activeClaimsNumEl = document.querySelector(".dashboard-stats .stat-card:nth-child(2) .stat-number");
   if (activeClaimsNumEl) {

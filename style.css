@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Cores Principais - Paleta AXA Design System Oficial */
+  /* Core Colors - Official AXA Design System Palette */
   --bg-primary: #f4f6f9; /* AXA Light Gray Background */
   --bg-card: #ffffff;
   --bg-header-start: #00008F; /* AXA Corporate Blue */
@@ -16,58 +16,59 @@
   --color-text-muted: #767676; /* AXA Gray Muted Text */
   --color-text-dark: #333333; /* AXA Neutral Charcoal */
   
-  /* Cores de Feedback - Urgência Baixa / Sucesso (AXA Green) */
+  /* Feedback Colors - Low Urgency / Success (AXA Green) */
   --color-success-bg: #EEF9F3; /* Soft AXA Green Tint */
   --color-success-border: #CEEFE0; 
   --color-success-text: #105C33; /* Dark green for text contrast */
   --color-success-accent: #1A8F53; /* AXA Green */
   
-  /* Cores de Feedback - Urgência Média / Alerta (AXA Orange) */
+  /* Feedback Colors - Medium Urgency / Alert (AXA Orange) */
   --color-warning-bg: #FCF6EE; /* Soft AXA Orange Tint */
   --color-warning-border: #F6E3CE; 
   --color-warning-text: #8F4A00; /* Dark orange for text contrast */
   --color-warning-accent: #E17F00; /* AXA Orange */
   
-  /* Cores de Feedback - Urgência Alta / Perigo (AXA Coral / Red) */
+  /* Feedback Colors - High Urgency / Danger (AXA Coral / Red) */
   --color-danger-bg: #FDF1EF; /* Soft AXA Coral Tint */
   --color-danger-border: #FCD7D1; 
   --color-danger-text: #A63625; /* Dark coral for text contrast */
   --color-danger-accent: #F07662; /* AXA Coral Action Accent */
   
-  /* Cores de Feedback - Urgência Crítica / Roxo (AXA Indigo/Purple) */
+  /* Feedback Colors - Critical Urgency / Indigo (AXA Indigo/Purple) */
   --color-critical-bg: #F5F2FC; /* Soft AXA Indigo Tint */
   --color-critical-border: #E1D8F5; 
   --color-critical-text: #4527A0; /* Dark purple for text contrast */
   --color-critical-accent: #7E57C2; /* AXA Purple */
   
-  /* Bordas e Elementos de Formulário */
+  /* Borders and Form Elements */
   --border-color: #E5E5E5; /* AXA Border Gray */
   --border-color-focus: #00008F; /* Focus AXA Blue */
   --bg-input: #F4F6F9;
   
-  /* Sombras */
+  /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
   --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.03), 0 8px 10px -6px rgb(0 0 0 / 0.03);
   
-  /* Transições */
+  /* Transitions */
   --transition-normal: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   
-  /* Fontes */
+  /* Fonts */
   --font-family-headings: 'Outfit', 'Segoe UI', sans-serif;
   --font-family-body: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
   
-  /* Arredondamento */
+  /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
 }
 
+
 /* ==========================================================================
-   Modo Escuro (Sleek Dark Mode Auto-Detection)
+   Sleek Dark Mode Auto-Detection
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -93,7 +94,7 @@
     --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     
-    /* Urgências em Dark Mode - Luminescentes para alto contraste */
+    /* Dark Mode Urgencies - Luminescent for high contrast */
     --color-success-bg: rgba(22, 163, 74, 0.1);
     --color-success-border: rgba(22, 163, 74, 0.25);
     --color-success-text: #4ade80; /* Green 400 */
@@ -309,7 +310,7 @@ textarea {
 }
 
 .urgency-option {
-  /* Ocultado visualmente por padrão no HTML através da classe sr-only */
+  /* Visually hidden by default in the HTML via the sr-only class */
 }
 
 .urgency-label {
@@ -352,7 +353,7 @@ textarea {
   color: var(--color-critical-text);
 }
 
-/* Ocultação visual acessível (sr-only) para o teclado */
+/* Accessible visual hiding (sr-only) for keyboard navigation */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -365,7 +366,7 @@ textarea {
   border: 0;
 }
 
-/* Estilo para navegação via teclado */
+/* Keyboard focus-visible navigation styling */
 .urgency-option:focus-visible + .urgency-label {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
   outline: 2px solid var(--color-primary);
@@ -803,7 +804,7 @@ textarea {
   }
 }
 
-/* Estilos de Validação de Erros */
+/* Error Validation Styles */
 .error-message {
   display: none;
   color: var(--color-danger-accent);
@@ -827,7 +828,7 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
   box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
 }
 
-/* Estilo do Botão de Demonstração (Demo Fill) */
+/* Demo Auto-Fill Button Styling */
 .btn-demo {
   padding: 8px 16px;
   background: white;
@@ -857,7 +858,7 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
 }
 
 /* ==========================================================================
-   Dashboard e Componentes do Portal do Voluntário
+   Dashboard and Components for the Volunteer Portal
    ========================================================================== */
 
 .dashboard-stats {
