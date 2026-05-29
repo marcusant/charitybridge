@@ -508,7 +508,6 @@ function renderTicketFeed() {
   const searchInput = document.getElementById("ticket-search");
   const searchText = searchInput ? searchInput.value.toLowerCase().trim() : "";
   
-  // Buscar a lista de tickets do localStorage
   const currentTickets = getStoredTickets();
 
   const filtered = currentTickets.filter(t => {
@@ -539,7 +538,14 @@ function renderTicketFeed() {
       : `<span class="ticket-status"><span class="status-dot"></span> Open</span>`;
     
     return `
-      <div class="ticket-feed-card ${isActive}" style="animation-delay: ${index * 0.12}s" onclick="selectTicket('${t.id}')">
+      <div
+        class="ticket-feed-card ${isActive}"
+        data-ticket-id="${t.id}"
+        style="animation-delay: ${index * 0.1}s"
+        onclick="selectTicket('${t.id}')"
+        role="button"
+        aria-label="View details for ticket ${t.id} from ${t.ngo}"
+      >
         <div class="ticket-feed-header">
           <div>
             <div class="ticket-feed-ngo">${t.ngo}</div>
@@ -583,8 +589,13 @@ function filterTickets() {
 function selectTicket(id) {
   activeTicketId = id;
   
-  renderTicketFeed();
-  
+  // ── Update active card highlight without re-rendering the whole feed ──────
+  // This avoids re-triggering slideRight animation on all cards every click.
+  document.querySelectorAll('.ticket-feed-card').forEach(card => {
+    const isActive = card.dataset.ticketId === id;
+    card.classList.toggle('active', isActive);
+  });
+
   const currentTickets = getStoredTickets();
   const ticket = currentTickets.find(t => t.id === id);
   const detailContainer = document.getElementById("ticket-detail-container");
@@ -592,28 +603,42 @@ function selectTicket(id) {
   if (!ticket || !detailContainer) return;
 
   const isClaimed = ticket.status === "Claimed";
+  const urgencyClass = ticket.urgency.toLowerCase();
+  const urgencyColors = {
+    high:     { bg: 'var(--color-danger-bg)',    color: 'var(--color-danger-text)',    border: 'var(--color-danger-border)' },
+    medium:   { bg: 'var(--color-warning-bg)',   color: 'var(--color-warning-text)',   border: 'var(--color-warning-border)' },
+    low:      { bg: 'var(--color-success-bg)',   color: 'var(--color-success-text)',   border: 'var(--color-success-border)' },
+    critical: { bg: 'var(--color-critical-bg)',  color: 'var(--color-critical-text)',  border: 'var(--color-critical-border)' },
+  };
+  const uc = urgencyColors[urgencyClass] || urgencyColors.medium;
+
   const claimButtonText = isClaimed 
     ? `<span role="img" aria-label="check mark">✓</span> Ticket Claimed by You` 
-    : `<span role="img" aria-label="accept lock">🤝</span> Claim Ticket & Contact Charity`;
+    : `<span role="img" aria-label="handshake">🤝</span> Claim Ticket & Contact Charity`;
 
+  // ── Render the detail panel ───────────────────────────────────────────────
   detailContainer.innerHTML = `
     <div class="detail-card">
+
       <div class="stagger-item delay-1">
-        <span class="tag tag-category" style="display:inline-flex; margin-bottom: 12px;"><span role="img" aria-label="tag">🏷️</span> ${ticket.category}</span>
-        <h2 style="font-family: var(--font-family-headings); font-size: 20px; font-weight: 700; color: var(--bg-header-start);">${ticket.ngo}</h2>
-        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 4px;">Location: ${ticket.country} • ID: ${ticket.id}</p>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+          <span class="tag tag-category" style="display:inline-flex;"><span role="img" aria-label="tag">🏷️</span> ${ticket.category}</span>
+          <span style="display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:var(--radius-full); font-size:12px; font-weight:700; background:${uc.bg}; color:${uc.color}; border:1px solid ${uc.border};">⚡ ${ticket.urgency} Urgency</span>
+        </div>
+        <h2 style="font-family:var(--font-family-headings); font-size:20px; font-weight:800; color:var(--bg-header-start); line-height:1.2;">${ticket.ngo}</h2>
+        <p style="font-size:12px; color:var(--color-text-muted); margin-top:6px;">📍 ${ticket.country} &nbsp;•&nbsp; ID: <strong>${ticket.id}</strong></p>
       </div>
 
       <div class="stagger-item delay-2">
-        <div class="detail-section-title">AI Problem Diagnosis</div>
-        <p style="font-size: 14px; color: var(--color-text-dark); line-height: 1.6;">${ticket.desc}</p>
+        <div class="detail-section-title">🤖 AI Problem Diagnosis</div>
+        <p style="font-size:14px; color:var(--color-text-dark); line-height:1.65; background:var(--bg-input); border-radius:var(--radius-sm); padding:14px; border-left:3px solid var(--color-primary);">${ticket.desc}</p>
       </div>
 
       <div class="stagger-item delay-3">
-        <div class="detail-section-title"><span role="img" aria-label="bullet checklist">📋</span> AI Suggested Response Plan</div>
-        <ul style="padding-left: 20px; display:flex; flex-direction:column; gap:8px;">
-          ${ticket.plan.map(p => `<li style="font-size:13px; color:var(--color-text-dark); line-height:1.5;">${p}</li>`).join("")}
-        </ul>
+        <div class="detail-section-title"><span role="img" aria-label="checklist">📋</span> AI Suggested Response Plan</div>
+        <ol style="padding-left:22px; display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+          ${ticket.plan.map(p => `<li style="font-size:13px; color:var(--color-text-dark); line-height:1.55;">${p}</li>`).join("")}
+        </ol>
       </div>
 
       <div class="stagger-item delay-4">
@@ -624,7 +649,7 @@ function selectTicket(id) {
       </div>
 
       <div class="stagger-item delay-5">
-        <div class="detail-section-title">Charity Contact Information</div>
+        <div class="detail-section-title">Charity Contact</div>
         <div class="detail-contact-box">
           <div class="contact-item">
             <span class="contact-label">Email:</span>
@@ -632,7 +657,7 @@ function selectTicket(id) {
           </div>
           <div class="contact-item">
             <span class="contact-label">Status:</span>
-            <span style="font-weight:700; color: ${isClaimed ? 'var(--color-primary-dark)' : 'var(--color-success-text)'};">${ticket.status}</span>
+            <span style="font-weight:700; color:${isClaimed ? 'var(--color-primary-dark)' : 'var(--color-success-text)'};">● ${ticket.status}</span>
           </div>
         </div>
       </div>
@@ -643,11 +668,22 @@ function selectTicket(id) {
         id="claim-btn-${ticket.id}" 
         onclick="claimTicket('${ticket.id}')"
         ${isClaimed ? "disabled" : ""}
+        aria-label="${isClaimed ? 'Ticket already claimed' : 'Claim this ticket and contact the charity'}"
       >
         ${claimButtonText}
       </button>
     </div>
   `;
+
+  // ── Scroll detail pane into view on mobile/stacked layout ────────────────
+  if (window.innerWidth <= 900) {
+    const detailPane = document.querySelector('.ticket-detail-pane');
+    if (detailPane) {
+      setTimeout(() => {
+        detailPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  }
 }
 
 function claimTicket(id) {
@@ -655,15 +691,17 @@ function claimTicket(id) {
   const ticketIndex = currentTickets.findIndex(t => t.id === id);
   if (ticketIndex === -1) return;
   
-  // Claim the ticket
+  // Mark as claimed and persist
   currentTickets[ticketIndex].status = "Claimed";
   saveTicketsToStorage(currentTickets);
   
-  // Re-render components
-  selectTicket(id);
+  // Re-render the feed first (updates the Claimed badge on the card)
   renderTicketFeed();
   
-  // Also update the active claims statistic at the top!
+  // Then refresh the detail panel for the claimed ticket
+  selectTicket(id);
+  
+  // Update active claims stat counter
   const claimedCount = currentTickets.filter(t => t.status === "Claimed").length;
   const activeClaimsNumEl = document.querySelector(".dashboard-stats .stat-card:nth-child(2) .stat-number");
   if (activeClaimsNumEl) {
@@ -672,26 +710,28 @@ function claimTicket(id) {
 
   // Toast confirmation notification
   const toast = document.createElement("div");
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
   toast.innerHTML = `<span role="img" aria-label="success checkbox">✅</span> Ticket successfully claimed! NGO contact details are unlocked.`;
-  toast.style.position = "fixed";
-  toast.style.bottom = "24px";
-  toast.style.right = "24px";
-  toast.style.background = "var(--bg-header-start)";
-  toast.style.color = "white";
-  toast.style.padding = "16px 24px";
-  toast.style.borderRadius = "var(--radius-md)";
-  toast.style.boxShadow = "var(--shadow-lg)";
-  toast.style.fontFamily = "var(--font-family-body)";
-  toast.style.fontSize = "14px";
-  toast.style.fontWeight = "600";
-  toast.style.zIndex = "1000";
-  toast.style.animation = "slideDown 0.3s ease reverse";
+  Object.assign(toast.style, {
+    position: 'fixed',
+    bottom: '24px',
+    right: '24px',
+    background: 'var(--bg-header-start)',
+    color: 'white',
+    padding: '16px 24px',
+    borderRadius: 'var(--radius-md)',
+    boxShadow: 'var(--shadow-lg)',
+    fontFamily: 'var(--font-family-body)',
+    fontSize: '14px',
+    fontWeight: '600',
+    zIndex: '1000',
+    animation: 'slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both',
+    maxWidth: '340px',
+  });
   
   document.body.appendChild(toast);
-  
-  setTimeout(() => {
-    toast.remove();
-  }, 3000);
+  setTimeout(() => toast.remove(), 3500);
 }
 
 // Initializing feeds and active claimed stats when volunteer portal is loaded

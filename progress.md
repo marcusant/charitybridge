@@ -77,8 +77,16 @@ This file serves as the real-time status dashboard for the development of the **
 ## 🪵 Delivery Log (Activity History)
 
 *(Completed activities are logged here in reverse chronological order).*
-*   **2026-05-29**:
-    *   Implemented premium **Staggered Micro-Animations** inside the Volunteer Portal's ticket details view pane (`app.js` and `style.css`). Child elements fade in and slide up dynamically one-by-one with staggered delays (`delay-1` to `delay-6`) to make detail selections highly interactive and elegant.
+*   **2026-05-29** *(update 2)*:
+    *   **Fixed Volunteer Portal — Ticket Detail Panel not showing content on click** (Fixes: animation bug, re-render flash, mobile layout):
+        *   **CSS `style.css`**: Changed `.stagger-item` from `opacity:0` + `animation-fill-mode:forwards` to `animation-fill-mode:both` — items are now guaranteed visible even if animations are disabled or delayed.
+        *   **CSS `style.css`**: Added `@keyframes cardReveal` and replaced `.detail-card` fadeIn with scale+translate reveal for a more polished opening.
+        *   **CSS `style.css`**: Added `max-height: calc(100vh - 90px)` + `overflow-y: auto` to `.ticket-detail-pane` so content never gets clipped on any screen size.
+        *   **CSS `style.css`**: Added `.vol-container { max-width: 1120px }` for the wider split-layout on the Volunteer Portal.
+        *   **JS `app.js`**: Removed `renderTicketFeed()` call from `selectTicket()` — clicking a ticket no longer re-animates all left-side cards, preventing the "flash / nothing changed" effect.
+        *   **JS `app.js`**: Added `data-ticket-id` attribute to feed cards and use `classList.toggle('active')` to update the highlighted card without a full re-render.
+        *   **JS `app.js`**: Added auto-scroll to the detail panel on mobile/tablet (≤ 900px viewport) when a ticket is clicked.
+        *   **HTML `volunteer.html`**: Added `vol-container` class to `<main>` for 1120px width.
     *   Updated `rules.md` to integrate **Strict English Policy** and **Synchronous Documentation Updates** requirements.
     *   Completed **Phase 5: GitHub Integration & Vercel Deployment**.
     *   Committed and **pushed repository source code to remote GitHub** (`https://github.com/marcusant/charitybridge.git`), linking the main branch.

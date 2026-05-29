@@ -224,6 +224,11 @@ header p {
   padding: 0 20px 60px;
 }
 
+/* Wider container for split-layout pages (Volunteer Portal) */
+.vol-container {
+  max-width: 1120px;
+}
+
 .card {
   background: var(--bg-card);
   backdrop-filter: blur(16px);
@@ -1093,6 +1098,22 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
 .ticket-detail-pane {
   position: sticky;
   top: 24px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.ticket-detail-pane::-webkit-scrollbar {
+  width: 5px;
+}
+.ticket-detail-pane::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ticket-detail-pane::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 99px;
 }
 
 .placeholder-detail {
@@ -1120,6 +1141,11 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
   line-height: 1.6;
 }
 
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
 .detail-card {
   background: var(--bg-card);
   backdrop-filter: blur(16px);
@@ -1131,21 +1157,36 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: cardReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Staggered Item Animations for premium interactive entry */
+/* Staggered Item Animations — use fill-mode: both so:
+   • during delay: element is at the 'from' state (invisible)
+   • after completion: element stays at 'to' state (visible)
+   • if animations are disabled: no opacity set → element is visible by default */
 .stagger-item {
-  opacity: 0;
-  animation: slideFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideFadeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.delay-1 { animation-delay: 0.05s; }
-.delay-2 { animation-delay: 0.10s; }
-.delay-3 { animation-delay: 0.15s; }
-.delay-4 { animation-delay: 0.20s; }
-.delay-5 { animation-delay: 0.25s; }
-.delay-6 { animation-delay: 0.30s; }
+.delay-1 { animation-delay: 0.07s; }
+.delay-2 { animation-delay: 0.17s; }
+.delay-3 { animation-delay: 0.27s; }
+.delay-4 { animation-delay: 0.37s; }
+.delay-5 { animation-delay: 0.47s; }
+.delay-6 { animation-delay: 0.57s; }
+
+/* Ensure stagger items are always visible when animations are disabled */
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    animation: none;
+  }
+  .detail-card {
+    animation: none;
+  }
+  .ticket-feed-card {
+    animation: none;
+  }
+}
 
 
 .detail-section-title {
