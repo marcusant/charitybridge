@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- SEO Primary Meta Tags -->
+  <title>Charity Bridge - Connect & Support Nonprofits</title>
+  <meta name="description" content="Welcome to Charity Bridge. A dual-portal platform bridging tech/admin volunteers with nonprofits in need. Experience instant local AI request categorization and localStorage synchronization." />
+  <meta name="keywords" content="nonprofit aid, volunteer platform, tech for social good, local AI matching, Vercel app, Charity Bridge" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Charity Bridge - Connect & Support Nonprofits" />
+  <meta property="og:description" content="Welcome to Charity Bridge. A dual-portal platform bridging tech/admin volunteers with nonprofits in need." />
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header style="justify-content: center; text-align: center;">
+  <div class="logo"><span role="img" aria-label="handshake and heart">🤝</span></div>
+  <div>
+    <h1>Charity Bridge</h1>
+    <p>Connecting nonprofits with skilled technical and operational volunteers</p>
+  </div>
+</header>
+
+<main class="container" style="max-width: 960px;">
+  
+  <div class="card" style="text-align: center; margin-bottom: 40px; padding: 48px;">
+    <h2 style="font-family: var(--font-family-headings); font-size: 28px; font-weight: 800; color: var(--bg-header-start); margin-bottom: 8px;">
+      Welcome to Charity Bridge
+    </h2>
+    <p style="color: var(--color-text-muted); font-size: 15px; max-width: 620px; margin: 0 auto 32px; line-height: 1.6;">
+      Choose your path below to enter the ecosystem. Submit support requests, browse active issues as a volunteer, or explore our interactive technical architectural presentation deck.
+    </p>
+    
+    <div class="splash-grid">
+      
+      <!-- Option 1: NGO Portal -->
+      <a href="NGO Portal.html" class="splash-card" aria-label="Enter NGO Support Portal">
+        <div class="splash-card-icon"><span role="img" aria-label="charity organization">🏢</span></div>
+        <div>
+          <h3>Charity Support Portal</h3>
+          <p style="margin-top: 8px;">
+            For nonprofit organizations. Describe your technical or operational issue, get an immediate AI response plan, and create a support ticket.
+          </p>
+        </div>
+        <div class="btn-apply" style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); width: 100%;">
+          Submit Request
+        </div>
+      </a>
+      
+      <!-- Option 2: Volunteer Portal -->
+      <a href="volunteer.html" class="splash-card" aria-label="Enter Volunteer Portal">
+        <div class="splash-card-icon"><span role="img" aria-label="volunteer heart">🙋‍♂️</span></div>
+        <div>
+          <h3>Volunteer Support Portal</h3>
+          <p style="margin-top: 8px;">
+            For professional technicians and consultants. Browse open tickets, review detailed AI diagnosis, and claim tasks to help charities in need.
+          </p>
+        </div>
+        <div class="btn-apply" style="background: linear-gradient(135deg, var(--color-success-accent), var(--color-success-text)); width: 100%;">
+          Browse & Claim Tickets
+        </div>
+      </a>
+      
+      <!-- Option 3: Slide Presentation Deck -->
+      <a href="presentation.html" class="splash-card" aria-label="Explore Project Presentation Slides">
+        <div class="splash-card-icon"><span role="img" aria-label="projection screen">📺</span></div>
+        <div>
+          <h3>Project Presentation</h3>
+          <p style="margin-top: 8px;">
+            Take an interactive slide deck tour. Discover the technology stack, accessibility achievements, design tokens, and live workflow simulations.
+          </p>
+        </div>
+        <div class="btn-apply" style="background: linear-gradient(135deg, var(--color-critical-accent), var(--color-critical-text)); width: 100%;">
+          View Presentation Deck
+        </div>
+      </a>
+      
+    </div>
+  </div>
+  
+  <!-- Features Section -->
+  <section class="presentation-grid" aria-label="Ecosystem Core Features" style="margin-top: 24px;">
+    
+    <div class="presentation-col-card">
+      <h4><span role="img" aria-label="sparkles">✨</span> Local AI request Triage</h4>
+      <p>NGO problems are parsed dynamically via a semantic keyword classifier to predict Cybersecurity, IT, Finance, CRM, or Comms categories automatically.</p>
+    </div>
+    
+    <div class="presentation-col-card">
+      <h4><span role="img" aria-label="storage sync link">🔗</span> localStorage Sync</h4>
+      <p>Enjoy a zero-latency database experience. Newly submitted tickets are instantly prepended to the volunteer dashboard queue without a remote backend requirement.</p>
+    </div>
+    
+    <div class="presentation-col-card" style="grid-column: span 1;">
+      <h4><span role="img" aria-label="wheelchair accessibility">♿</span> WCAG 2.1 AA Compliant</h4>
+      <p>Built from scratch with fully accessible semantic layouts. Supports keyboard navigation, off-screen tab focuses, and screen-reader labeled emojis.</p>
+    </div>
+    
+    <div class="presentation-col-card" style="grid-column: span 1;">
+      <h4><span role="img" aria-label="lightning speed">⚡</span> Ultra-lightweight Build</h4>
+      <p>100% pure modern HTML5, vanilla CSS, and vanilla JS. Fast loading times, pristine clean code structures, ready for immediate Vercel deployments.</p>
+    </div>
+    
+  </section>
+  
+</main>
+
+<footer style="text-align: center; padding: 40px 20px; color: var(--color-text-muted); font-size: 13px; border-top: 1px solid var(--border-color); background: white;">
+  <p>© 2026 Charity Bridge. Empowering social impact through technology and collaboration.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- SEO Primary Meta Tags -->
+  <title>Volunteer Support Portal - Charity Bridge</title>
+  <meta name="description" content="Donate your professional tech and business skills to nonprofits. Browse open support tickets, view AI-powered problem analysis, and claim tasks to help." />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Volunteer Support Portal - Claim Tickets & Help Nonprofits" />
+  <meta property="og:description" content="Browse open support tickets from charities, view AI-powered problem analysis, and claim tasks to help." />
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo"><span role="img" aria-label="volunteer heart hands">🙋‍♂️</span></div>
+  <div style="flex-grow: 1;">
+    <h1>Volunteer Support Portal</h1>
+    <p>Claim support tickets and donate your expertise to nonprofits in need</p>
+  </div>
+  <div style="display: flex; gap: 12px;">
+    <a href="presentation.html" class="btn-demo" style="text-decoration: none; border-color: rgba(255,255,255,0.4); background: transparent; color: white;">
+      <span role="img" aria-label="project presentation screen">📺</span> Project Presentation
+    </a>
+    <a href="NGO Portal.html" class="btn-demo" style="text-decoration: none; border-color: rgba(255,255,255,0.4); background: transparent; color: white;">
+      <span role="img" aria-label="switch arrow">🔄</span> Switch to Charity Portal
+    </a>
+  </div>
+</header>
+
+<main class="container">
+  
+  <!-- Dashboard Stats row -->
+  <section class="dashboard-stats" aria-label="Volunteer Statistics Summary">
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-title">Hours Contributed</span>
+        <span class="stat-icon"><span role="img" aria-label="clock hourglass">⏳</span></span>
+      </div>
+      <div class="stat-number">24 hrs</div>
+      <div class="stat-desc">Total time donated this year</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-title">Active Claims</span>
+        <span class="stat-icon"><span role="img" aria-label="open lock">🔓</span></span>
+      </div>
+      <div class="stat-number">1 Ticket</div>
+      <div class="stat-desc">Tasks currently in progress</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-header">
+        <span class="stat-title">Profile Accuracy</span>
+        <span class="stat-icon"><span role="img" aria-label="bullseye target">🎯</span></span>
+      </div>
+      <div class="stat-number">96%</div>
+      <div class="stat-desc">Skill matching affinity rate</div>
+    </div>
+  </section>
+
+  <!-- Main Feed Layout -->
+  <div class="split-layout">
+    
+    <!-- Left Column: Search, Filters & Tickets Feed -->
+    <section aria-label="Available Support Tickets Feed">
+      
+      <div class="search-filter-container">
+        
+        <div class="search-box">
+          <span class="search-icon-absolute"><span role="img" aria-label="magnifying glass">🔍</span></span>
+          <input 
+            type="text" 
+            id="ticket-search" 
+            class="search-input" 
+            placeholder="Search tickets by charity, description or skill..."
+            oninput="filterTickets()"
+          />
+        </div>
+        
+        <div class="filter-scroll" id="filter-pills" aria-label="Filter tickets by category">
+          <button type="button" class="filter-btn active" onclick="setCategoryFilter('all')">All Specialities</button>
+          <button type="button" class="filter-btn" onclick="setCategoryFilter('cybersecurity')">Cybersecurity</button>
+          <button type="button" class="filter-btn" onclick="setCategoryFilter('it-infrastructure')">IT Infrastructure</button>
+          <button type="button" class="filter-btn" onclick="setCategoryFilter('finance')">Finance & Accounting</button>
+          <button type="button" class="filter-btn" onclick="setCategoryFilter('software')">Software & CRM</button>
+          <button type="button" class="filter-btn" onclick="setCategoryFilter('communications')">Communications</button>
+        </div>
+        
+      </div>
+      
+      <div class="feed-title">
+        <span role="img" aria-label="ticket board">📋</span> Open Tickets Available
+      </div>
+      
+      <div class="ticket-feed" id="ticket-feed-container">
+        <!-- Tickets will be populated here via JavaScript -->
+      </div>
+      
+    </section>
+    
+    <!-- Right Column: Selected Ticket Details -->
+    <aside class="ticket-detail-pane" aria-label="Ticket detail expand and claiming panel">
+      <div id="ticket-detail-container">
+        <div class="placeholder-detail">
+          <span class="placeholder-icon"><span role="img" aria-label="empty document">📄</span></span>
+          <h4 style="font-family: var(--font-family-headings); font-size: 16px; font-weight: 700; color: var(--color-text-dark);">No Ticket Selected</h4>
+          <p class="placeholder-text">
+            Select a ticket from the left panel to review full AI analysis, suggested action plans, and claim it to start helping the nonprofit organization.
+          </p>
+        </div>
+      </div>
+    </aside>
+    
+  </div>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
