@@ -1,55 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Cores Principais - Paleta AXA Brand Colors */
-  --bg-primary: #f8fafc; /* Slate 50 */
+  /* Cores Principais - Paleta AXA Design System Oficial */
+  --bg-primary: #f4f6f9; /* AXA Light Gray Background */
   --bg-card: #ffffff;
   --bg-header-start: #00008F; /* AXA Corporate Blue */
-  --bg-header-end: #00005F; /* AXA Deep Navy */
+  --bg-header-end: #00005B; /* AXA Deep Navy */
   
   --color-primary: #00008F; /* AXA Blue */
-  --color-primary-dark: #000066; /* Darker AXA Blue */
-  --color-primary-light: #f0f3ff; /* Very soft light blue tint */
-  --color-primary-border: #cdd5ff; /* Soft blue border tint */
+  --color-primary-dark: #00005C; /* Darker AXA Blue */
+  --color-primary-light: #F0F2FB; /* Light AXA Blue Tint */
+  --color-primary-border: #CCD2FC; /* Soft AXA Blue Border */
   
-  --color-text-main: #0f172a; /* Slate 900 */
-  --color-text-muted: #64748b; /* Slate 500 */
-  --color-text-dark: #334155; /* Slate 700 */
+  --color-text-main: #1C1C1C; /* AXA Slate Dark Text */
+  --color-text-muted: #767676; /* AXA Gray Muted Text */
+  --color-text-dark: #333333; /* AXA Neutral Charcoal */
   
-  /* Cores de Feedback - Urgência Baixa / Sucesso */
-  --color-success-bg: #f0fdf4; /* Green 50 */
-  --color-success-border: #bbf7d0; /* Green 200 */
-  --color-success-text: #166534; /* Green 800 */
-  --color-success-accent: #22c55e; /* Green 500 */
+  /* Cores de Feedback - Urgência Baixa / Sucesso (AXA Green) */
+  --color-success-bg: #EEF9F3; /* Soft AXA Green Tint */
+  --color-success-border: #CEEFE0; 
+  --color-success-text: #105C33; /* Dark green for text contrast */
+  --color-success-accent: #1A8F53; /* AXA Green */
   
-  /* Cores de Feedback - Urgência Média / Alerta */
-  --color-warning-bg: #fffbeb; /* Amber 50 */
-  --color-warning-border: #fde68a; /* Amber 200 */
-  --color-warning-text: #92400e; /* Amber 800 */
-  --color-warning-accent: #f59e0b; /* Amber 500 */
+  /* Cores de Feedback - Urgência Média / Alerta (AXA Orange) */
+  --color-warning-bg: #FCF6EE; /* Soft AXA Orange Tint */
+  --color-warning-border: #F6E3CE; 
+  --color-warning-text: #8F4A00; /* Dark orange for text contrast */
+  --color-warning-accent: #E17F00; /* AXA Orange */
   
-  /* Cores de Feedback - Urgência Alta / Perigo (AXA Red) */
-  --color-danger-bg: #fef2f2; /* Red 50 */
-  --color-danger-border: #fecaca; /* Red 200 */
-  --color-danger-text: #b30010; /* Dark AXA Red */
-  --color-danger-accent: #E0001B; /* AXA Red */
+  /* Cores de Feedback - Urgência Alta / Perigo (AXA Coral / Red) */
+  --color-danger-bg: #FDF1EF; /* Soft AXA Coral Tint */
+  --color-danger-border: #FCD7D1; 
+  --color-danger-text: #A63625; /* Dark coral for text contrast */
+  --color-danger-accent: #F07662; /* AXA Coral Action Accent */
   
-  /* Cores de Feedback - Urgência Crítica / Roxo */
-  --color-critical-bg: #faf5ff; /* Purple 50 */
-  --color-critical-border: #e9d5ff; /* Purple 200 */
-  --color-critical-text: #6b21a8; /* Purple 800 */
-  --color-critical-accent: #a855f7; /* Purple 500 */
+  /* Cores de Feedback - Urgência Crítica / Roxo (AXA Indigo/Purple) */
+  --color-critical-bg: #F5F2FC; /* Soft AXA Indigo Tint */
+  --color-critical-border: #E1D8F5; 
+  --color-critical-text: #4527A0; /* Dark purple for text contrast */
+  --color-critical-accent: #7E57C2; /* AXA Purple */
   
   /* Bordas e Elementos de Formulário */
-  --border-color: #e2e8f0; /* Slate 200 */
-  --border-color-focus: #3b82f6;
-  --bg-input: #f8fafc;
+  --border-color: #E5E5E5; /* AXA Border Gray */
+  --border-color-focus: #00008F; /* Focus AXA Blue */
+  --bg-input: #F4F6F9;
   
   /* Sombras */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.03), 0 8px 10px -6px rgb(0 0 0 / 0.03);
   
   /* Transições */
   --transition-normal: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
