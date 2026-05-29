@@ -50,3 +50,40 @@ Then open [http://localhost:8080](http://localhost:8080) in your browser.
 1. Push the code repository to your GitHub.
 2. Import the project in Vercel.
 3. The platform will automatically deploy and clean URL routing will be active out-of-the-box using the configured `vercel.json` rules!
+
+---
+
+## 🚀 Production Full-Stack Roadmap
+
+To transition Charity Bridge from a local static prototype into a fully operational production-grade web application, the following modern serverless tech stack is highly recommended:
+
+### 1. Unified Framework: **Next.js (React + TypeScript)**
+- **Role**: Combines frontend visual components with secure backend API routes.
+- **Benefits**: Perfect Vercel alignment, built-in dynamic router, and protected server-side environment keys.
+
+### 2. Live Triage AI Core: **Google Gemini Pro API**
+- **Role**: Swaps regex classifiers for advanced LLM semantic analysis.
+- **Benefits**: Returns 99.9% accurate incident category predictions, threat risk assessments, and custom-tailored checklist plans in JSON structures.
+
+### 3. Production Hosting: **Vercel**
+- **Role**: Edge distribution and instant build updates triggered by Git pushes.
+
+### 4. Database Options (Free Tier Production-grade)
+
+For secure data storage, user authentication, and profile tracking, the following databases offer outstanding **100% free-forever tiers**:
+
+#### A. **Supabase (PostgreSQL + BaaS)** - *Highly Recommended*
+- **Database Type**: Relational PostgreSQL.
+- **Free Tier**: 2 active Postgres projects, 500MB database storage, secure Auth, and Realtime websocket listeners.
+- **Ideal For**: Complete backend infrastructure out-of-the-box (social sign-ups, instant ticket feed updates, Row-Level Security).
+
+#### B. **Neon Serverless Postgres (neon.tech)** - *Top Relational Alternative*
+- **Database Type**: Relational PostgreSQL.
+- **Free Tier**: 1 branch Postgres instance, 0.5 GiB database storage, and scale-to-zero compute (totally free forever).
+- **Ideal For**: Classic relational operations (NGOs, Volunteers, Tickets table associations) with seamless Next.js and Vercel dashboard connections.
+
+#### C. **MongoDB Atlas (mongodb.com/atlas)** - *NoSQL Document Alternative*
+- **Database Type**: NoSQL Document Database.
+- **Free Tier**: M0 Shared cluster offering 512MB storage and fully managed security.
+- **Ideal For**: Fast document schemas where ticket shapes might vary heavily.
+
