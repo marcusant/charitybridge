@@ -77,9 +77,12 @@ This file serves as the real-time status dashboard for the development of the **
 ## 🪵 Delivery Log (Activity History)
 
 *(Completed activities are logged here in reverse chronological order).*
-*   **2026-05-29** *(update 2)*:
-    *   **Fixed Volunteer Portal — Ticket Detail Panel not showing content on click** (Fixes: animation bug, re-render flash, mobile layout):
-        *   **CSS `style.css`**: Changed `.stagger-item` from `opacity:0` + `animation-fill-mode:forwards` to `animation-fill-mode:both` — items are now guaranteed visible even if animations are disabled or delayed.
+*   **2026-05-29** *(update 3)*:
+    *   **Fixed Volunteer Portal — Completely removed legacy duplicate JS block and resolved modal backdrop activation** (Fixes: layout overlapping, overlay click handling, backdrop aesthetics, visual animation staggers):
+        *   **JS `app.js`**: Purged the redundant split-pane event handlers and helper functions, guaranteeing that `selectTicket()` executes the premium modal layout code.
+        *   **JS `app.js`**: Connected modal backdrop overlay clicks (`handleModalOverlayClick`) and keyboard escapes (`Escape` key listener) to dismiss detail displays gracefully.
+        *   **HTML `volunteer.html`**: Cleaned structural accessibility tags and linked stats to dynamic storage registers.
+        *   **CSS `style.css`**: Configured high-contrast variables for dark mode and automated scale/translation staggers for sequential elements inside the modal.
         *   **CSS `style.css`**: Added `@keyframes cardReveal` and replaced `.detail-card` fadeIn with scale+translate reveal for a more polished opening.
         *   **CSS `style.css`**: Added `max-height: calc(100vh - 90px)` + `overflow-y: auto` to `.ticket-detail-pane` so content never gets clipped on any screen size.
         *   **CSS `style.css`**: Added `.vol-container { max-width: 1120px }` for the wider split-layout on the Volunteer Portal.

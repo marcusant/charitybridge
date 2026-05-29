@@ -498,65 +498,80 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================================================
 
 let currentCategory = "all";
-let activeTicketId = null;
+let activeTicketId   = null;  // currently open ticket in modal
 
-// Populates the volunteer ticket feed
+// ── Urgency colour map ────────────────────────────────────────────────────────
+const URGENCY_COLORS = {
+  high:     { bg: 'var(--color-danger-bg)',   color: 'var(--color-danger-text)',   border: 'var(--color-danger-border)' },
+  medium:   { bg: 'var(--color-warning-bg)',  color: 'var(--color-warning-text)',  border: 'var(--color-warning-border)' },
+  low:      { bg: 'var(--color-success-bg)',  color: 'var(--color-success-text)',  border: 'var(--color-success-border)' },
+  critical: { bg: 'var(--color-critical-bg)', color: 'var(--color-critical-text)', border: 'var(--color-critical-border)' },
+};
+
+// ── Renders the ticket feed cards ─────────────────────────────────────────────
 function renderTicketFeed() {
   const feedContainer = document.getElementById("ticket-feed-container");
-  if (!feedContainer) return; // Not on volunteer portal page
+  if (!feedContainer) return;
 
-  const searchInput = document.getElementById("ticket-search");
-  const searchText = searchInput ? searchInput.value.toLowerCase().trim() : "";
-  
+  const searchText = (document.getElementById("ticket-search")?.value ?? "").toLowerCase().trim();
   const currentTickets = getStoredTickets();
 
   const filtered = currentTickets.filter(t => {
     const matchesCategory = (currentCategory === "all" || t.issueType === currentCategory);
-    const matchesSearch = (
-      t.ngo.toLowerCase().includes(searchText) || 
-      t.desc.toLowerCase().includes(searchText) || 
+    const matchesSearch   = (
+      t.ngo.toLowerCase().includes(searchText)      ||
+      t.desc.toLowerCase().includes(searchText)     ||
       t.category.toLowerCase().includes(searchText) ||
       t.skills.some(s => s.toLowerCase().includes(searchText))
     );
     return matchesCategory && matchesSearch;
   });
 
+  // Update count badge
+  const badge = document.getElementById("ticket-count-badge");
+  if (badge) badge.textContent = filtered.length > 0 ? filtered.length : "";
+
   if (filtered.length === 0) {
     feedContainer.innerHTML = `
-      <div style="text-align: center; padding: 40px; color: var(--color-text-muted); background: white; border: 1px dashed var(--border-color); border-radius: var(--radius-md);">
-        <p>No active support tickets found matching your current filter.</p>
+      <div style="grid-column:1/-1; text-align:center; padding:48px 24px; color:var(--color-text-muted); background:white; border:1px dashed var(--border-color); border-radius:var(--radius-md);">
+        <div style="font-size:40px; margin-bottom:12px;">🔍</div>
+        <p style="font-size:14px;">No tickets found matching your filter. Try a different search or category.</p>
       </div>
     `;
     return;
   }
 
   feedContainer.innerHTML = filtered.map((t, index) => {
-    const urgencyClass = t.urgency.toLowerCase();
-    const isActive = t.id === activeTicketId ? "active" : "";
-    const isClaimed = t.status === "Claimed" 
-      ? `<span class="ticket-status" style="background:var(--color-primary-light); color:var(--color-primary-dark); border-color:var(--color-primary-border);">Claimed</span>` 
+    const uc = URGENCY_COLORS[t.urgency.toLowerCase()] || URGENCY_COLORS.medium;
+    const statusBadge = t.status === "Claimed"
+      ? `<span class="ticket-status" style="background:var(--color-primary-light); color:var(--color-primary-dark); border-color:var(--color-primary-border);">✓ Claimed</span>`
       : `<span class="ticket-status"><span class="status-dot"></span> Open</span>`;
-    
+
     return `
       <div
-        class="ticket-feed-card ${isActive}"
+        class="ticket-feed-card"
         data-ticket-id="${t.id}"
-        style="animation-delay: ${index * 0.1}s"
+        style="animation-delay: ${index * 0.08}s; cursor:pointer;"
         onclick="selectTicket('${t.id}')"
         role="button"
-        aria-label="View details for ticket ${t.id} from ${t.ngo}"
+        tabindex="0"
+        onkeydown="if(event.key==='Enter'||event.key===' ')selectTicket('${t.id}')"
+        aria-label="Open details for ${t.ngo} ticket"
       >
         <div class="ticket-feed-header">
           <div>
             <div class="ticket-feed-ngo">${t.ngo}</div>
-            <div class="ticket-feed-meta">${t.country} • Ticket ID: ${t.id}</div>
+            <div class="ticket-feed-meta">📍 ${t.country} &nbsp;•&nbsp; ${t.id}</div>
           </div>
-          ${isClaimed}
+          ${statusBadge}
         </div>
         <p class="ticket-feed-desc">${t.desc}</p>
         <div class="ticket-feed-tags">
-          <span class="tag tag-category" style="padding: 4px 10px; font-size: 11px;"><span role="img" aria-label="category tag">🏷️</span> ${t.category}</span>
-          <span class="tag tag-urgency ${urgencyClass}" style="padding: 4px 10px; font-size: 11px;"><span role="img" aria-label="urgency level">⚡</span> ${t.urgency}</span>
+          <span class="tag tag-category" style="padding:4px 10px; font-size:11px;"><span role="img" aria-label="tag">🏷️</span> ${t.category}</span>
+          <span style="display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:var(--radius-sm); font-size:11px; font-weight:700; background:${uc.bg}; color:${uc.color}; border:1px solid ${uc.border};">⚡ ${t.urgency}</span>
+        </div>
+        <div style="margin-top:4px; font-size:12px; color:var(--color-primary); font-weight:600; display:flex; align-items:center; gap:4px;">
+          <span>View full details & claim</span> <span>→</span>
         </div>
       </div>
     `;
@@ -565,188 +580,170 @@ function renderTicketFeed() {
 
 function setCategoryFilter(category) {
   currentCategory = category;
-  
-  const buttons = document.querySelectorAll("#filter-pills .filter-btn");
-  if (buttons.length > 0) {
-    buttons.forEach(btn => btn.classList.remove("active"));
-    
-    const indexMap = {
-      "all": 0, "cybersecurity": 1, "it-infrastructure": 2, "finance": 3, "software": 4, "communications": 5
-    };
-    const activeBtnIndex = indexMap[category] ?? 0;
-    if (buttons[activeBtnIndex]) {
-      buttons[activeBtnIndex].classList.add("active");
-    }
-  }
-  
-  renderTicketFeed();
-}
-
-function filterTickets() {
-  renderTicketFeed();
-}
-
-function selectTicket(id) {
-  activeTicketId = id;
-  
-  // ── Update active card highlight without re-rendering the whole feed ──────
-  // This avoids re-triggering slideRight animation on all cards every click.
-  document.querySelectorAll('.ticket-feed-card').forEach(card => {
-    const isActive = card.dataset.ticketId === id;
-    card.classList.toggle('active', isActive);
+  document.querySelectorAll("#filter-pills .filter-btn").forEach((btn, i) => {
+    const map = { all:0, cybersecurity:1, "it-infrastructure":2, finance:3, software:4, communications:5 };
+    btn.classList.toggle("active", i === (map[category] ?? 0));
   });
+  renderTicketFeed();
+}
 
+function filterTickets() { renderTicketFeed(); }
+
+// ── Open ticket modal ─────────────────────────────────────────────────────────
+function selectTicket(id) {
   const currentTickets = getStoredTickets();
   const ticket = currentTickets.find(t => t.id === id);
-  const detailContainer = document.getElementById("ticket-detail-container");
-  
-  if (!ticket || !detailContainer) return;
+  if (!ticket) return;
 
+  activeTicketId = id;
+
+  const uc = URGENCY_COLORS[ticket.urgency.toLowerCase()] || URGENCY_COLORS.medium;
   const isClaimed = ticket.status === "Claimed";
-  const urgencyClass = ticket.urgency.toLowerCase();
-  const urgencyColors = {
-    high:     { bg: 'var(--color-danger-bg)',    color: 'var(--color-danger-text)',    border: 'var(--color-danger-border)' },
-    medium:   { bg: 'var(--color-warning-bg)',   color: 'var(--color-warning-text)',   border: 'var(--color-warning-border)' },
-    low:      { bg: 'var(--color-success-bg)',   color: 'var(--color-success-text)',   border: 'var(--color-success-border)' },
-    critical: { bg: 'var(--color-critical-bg)',  color: 'var(--color-critical-text)',  border: 'var(--color-critical-border)' },
-  };
-  const uc = urgencyColors[urgencyClass] || urgencyColors.medium;
 
-  const claimButtonText = isClaimed 
-    ? `<span role="img" aria-label="check mark">✓</span> Ticket Claimed by You` 
-    : `<span role="img" aria-label="handshake">🤝</span> Claim Ticket & Contact Charity`;
-
-  // ── Render the detail panel ───────────────────────────────────────────────
-  detailContainer.innerHTML = `
-    <div class="detail-card">
-
-      <div class="stagger-item delay-1">
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
-          <span class="tag tag-category" style="display:inline-flex;"><span role="img" aria-label="tag">🏷️</span> ${ticket.category}</span>
-          <span style="display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:var(--radius-full); font-size:12px; font-weight:700; background:${uc.bg}; color:${uc.color}; border:1px solid ${uc.border};">⚡ ${ticket.urgency} Urgency</span>
-        </div>
-        <h2 style="font-family:var(--font-family-headings); font-size:20px; font-weight:800; color:var(--bg-header-start); line-height:1.2;">${ticket.ngo}</h2>
-        <p style="font-size:12px; color:var(--color-text-muted); margin-top:6px;">📍 ${ticket.country} &nbsp;•&nbsp; ID: <strong>${ticket.id}</strong></p>
-      </div>
-
-      <div class="stagger-item delay-2">
-        <div class="detail-section-title">🤖 AI Problem Diagnosis</div>
-        <p style="font-size:14px; color:var(--color-text-dark); line-height:1.65; background:var(--bg-input); border-radius:var(--radius-sm); padding:14px; border-left:3px solid var(--color-primary);">${ticket.desc}</p>
-      </div>
-
-      <div class="stagger-item delay-3">
-        <div class="detail-section-title"><span role="img" aria-label="checklist">📋</span> AI Suggested Response Plan</div>
-        <ol style="padding-left:22px; display:flex; flex-direction:column; gap:10px; margin-top:4px;">
-          ${ticket.plan.map(p => `<li style="font-size:13px; color:var(--color-text-dark); line-height:1.55;">${p}</li>`).join("")}
-        </ol>
-      </div>
-
-      <div class="stagger-item delay-4">
-        <div class="detail-section-title">Required Skills</div>
-        <div class="skills-list">
-          ${ticket.skills.map(s => `<span class="skill-pill"><span role="img" aria-label="wrench">🔧</span> ${s}</span>`).join("")}
-        </div>
-      </div>
-
-      <div class="stagger-item delay-5">
-        <div class="detail-section-title">Charity Contact</div>
-        <div class="detail-contact-box">
-          <div class="contact-item">
-            <span class="contact-label">Email:</span>
-            <a href="mailto:${ticket.email}" style="color:var(--color-primary); font-weight:600; text-decoration:none;">${ticket.email}</a>
-          </div>
-          <div class="contact-item">
-            <span class="contact-label">Status:</span>
-            <span style="font-weight:700; color:${isClaimed ? 'var(--color-primary-dark)' : 'var(--color-success-text)'};">● ${ticket.status}</span>
-          </div>
-        </div>
-      </div>
-
-      <button 
-        type="button" 
-        class="btn-apply stagger-item delay-6" 
-        id="claim-btn-${ticket.id}" 
-        onclick="claimTicket('${ticket.id}')"
-        ${isClaimed ? "disabled" : ""}
-        aria-label="${isClaimed ? 'Ticket already claimed' : 'Claim this ticket and contact the charity'}"
-      >
-        ${claimButtonText}
-      </button>
-    </div>
+  // ── Populate modal fields ──────────────────────────────────────────────────
+  document.getElementById("modal-tags").innerHTML = `
+    <span class="tag tag-category" style="display:inline-flex; font-size:12px; padding:4px 12px;">
+      <span role="img" aria-label="tag">🏷️</span> ${ticket.category}
+    </span>
+    <span style="display:inline-flex; align-items:center; gap:5px; padding:4px 12px; border-radius:var(--radius-full); font-size:12px; font-weight:700; background:${uc.bg}; color:${uc.color}; border:1px solid ${uc.border};">
+      ⚡ ${ticket.urgency} Urgency
+    </span>
   `;
 
-  // ── Scroll detail pane into view on mobile/stacked layout ────────────────
-  if (window.innerWidth <= 900) {
-    const detailPane = document.querySelector('.ticket-detail-pane');
-    if (detailPane) {
-      setTimeout(() => {
-        detailPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 80);
-    }
-  }
-}
+  document.getElementById("modal-ngo-name").textContent = ticket.ngo;
+  document.getElementById("modal-meta").innerHTML =
+    `📍 ${ticket.country} &nbsp;•&nbsp; ID: <strong>${ticket.id}</strong>`;
 
-function claimTicket(id) {
-  const currentTickets = getStoredTickets();
-  const ticketIndex = currentTickets.findIndex(t => t.id === id);
-  if (ticketIndex === -1) return;
-  
-  // Mark as claimed and persist
-  currentTickets[ticketIndex].status = "Claimed";
-  saveTicketsToStorage(currentTickets);
-  
-  // Re-render the feed first (updates the Claimed badge on the card)
-  renderTicketFeed();
-  
-  // Then refresh the detail panel for the claimed ticket
-  selectTicket(id);
-  
-  // Update active claims stat counter
-  const claimedCount = currentTickets.filter(t => t.status === "Claimed").length;
-  const activeClaimsNumEl = document.querySelector(".dashboard-stats .stat-card:nth-child(2) .stat-number");
-  if (activeClaimsNumEl) {
-    activeClaimsNumEl.textContent = `${claimedCount} Ticket${claimedCount !== 1 ? 's' : ''}`;
+  document.getElementById("modal-desc").textContent = ticket.desc;
+
+  document.getElementById("modal-plan").innerHTML =
+    ticket.plan.map(p => `<li>${p}</li>`).join("");
+
+  document.getElementById("modal-skills").innerHTML =
+    ticket.skills.map(s => `<span class="skill-pill"><span role="img" aria-label="wrench">🔧</span> ${s}</span>`).join("");
+
+  const emailLink = document.getElementById("modal-email-link");
+  emailLink.href = `mailto:${ticket.email}`;
+  emailLink.textContent = ticket.email;
+
+  const statusEl = document.getElementById("modal-status-text");
+  statusEl.textContent = `● ${ticket.status}`;
+  statusEl.style.color = isClaimed ? "var(--color-primary-dark)" : "var(--color-success-text)";
+
+  const claimBtn = document.getElementById("modal-claim-btn");
+  if (isClaimed) {
+    claimBtn.disabled = true;
+    claimBtn.innerHTML = `<span role="img" aria-label="check">✓</span> Ticket Already Claimed`;
+    claimBtn.style.background = "var(--border-color)";
+    claimBtn.style.color = "var(--color-text-muted)";
+    claimBtn.style.cursor = "not-allowed";
+    claimBtn.style.boxShadow = "none";
+  } else {
+    claimBtn.disabled = false;
+    claimBtn.innerHTML = `🤝 Claim Ticket &amp; Contact Charity`;
+    claimBtn.style.background = "";
+    claimBtn.style.color = "";
+    claimBtn.style.cursor = "";
+    claimBtn.style.boxShadow = "";
   }
 
-  // Toast confirmation notification
-  const toast = document.createElement("div");
-  toast.setAttribute('role', 'status');
-  toast.setAttribute('aria-live', 'polite');
-  toast.innerHTML = `<span role="img" aria-label="success checkbox">✅</span> Ticket successfully claimed! NGO contact details are unlocked.`;
-  Object.assign(toast.style, {
-    position: 'fixed',
-    bottom: '24px',
-    right: '24px',
-    background: 'var(--bg-header-start)',
-    color: 'white',
-    padding: '16px 24px',
-    borderRadius: 'var(--radius-md)',
-    boxShadow: 'var(--shadow-lg)',
-    fontFamily: 'var(--font-family-body)',
-    fontSize: '14px',
-    fontWeight: '600',
-    zIndex: '1000',
-    animation: 'slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both',
-    maxWidth: '340px',
+  // ── Reset stagger animations by re-triggering them ─────────────────────────
+  document.querySelectorAll("#ticket-modal-dialog .stagger-item").forEach(el => {
+    el.style.animation = "none";
+    void el.offsetWidth; // force reflow
+    el.style.animation = "";
   });
-  
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3500);
+
+  // ── Open the modal ─────────────────────────────────────────────────────────
+  const overlay = document.getElementById("ticket-modal-overlay");
+  overlay.classList.remove("is-closing");
+  overlay.classList.add("is-open");
+  document.body.style.overflow = "hidden"; // prevent page scroll while modal is open
+  document.getElementById("modal-close-btn").focus();
 }
 
-// Initializing feeds and active claimed stats when volunteer portal is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("ticket-feed-container")) {
-    renderTicketFeed();
-    
-    // Set dynamic count for active claimed tickets
-    const currentTickets = getStoredTickets();
-    const claimedCount = currentTickets.filter(t => t.status === "Claimed").length;
-    const activeClaimsNumEl = document.querySelector(".dashboard-stats .stat-card:nth-child(2) .stat-number");
-    if (activeClaimsNumEl) {
-      activeClaimsNumEl.textContent = `${claimedCount} Ticket${claimedCount !== 1 ? 's' : ''}`;
-    }
+// ── Close ticket modal (with exit animation) ───────────────────────────────────
+function closeTicketModal() {
+  const overlay = document.getElementById("ticket-modal-overlay");
+  if (!overlay || !overlay.classList.contains("is-open")) return;
+
+  overlay.classList.add("is-closing");
+  overlay.addEventListener("animationend", () => {
+    overlay.classList.remove("is-open", "is-closing");
+    document.body.style.overflow = "";
+    activeTicketId = null;
+  }, { once: true });
+}
+
+// Close on backdrop click (not on dialog itself)
+function handleModalOverlayClick(event) {
+  if (event.target === document.getElementById("ticket-modal-overlay")) {
+    closeTicketModal();
   }
+}
+
+// Close on ESC key
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeTicketModal();
+});
+
+// ── Claim ticket from modal ────────────────────────────────────────────────────
+function claimTicketFromModal() {
+  if (!activeTicketId) return;
+  const id = activeTicketId;
+
+  const currentTickets = getStoredTickets();
+  const idx = currentTickets.findIndex(t => t.id === id);
+  if (idx === -1) return;
+
+  currentTickets[idx].status = "Claimed";
+  saveTicketsToStorage(currentTickets);
+
+  // Refresh modal to show claimed state
+  selectTicket(id);
+
+  // Refresh feed card badge
+  renderTicketFeed();
+
+  // Update stat counter
+  const claimedCount = currentTickets.filter(t => t.status === "Claimed").length;
+  const statEl = document.getElementById("active-claims-count");
+  if (statEl) statEl.textContent = `${claimedCount} Ticket${claimedCount !== 1 ? "s" : ""}`;
+
+  // Toast notification
+  const toast = document.createElement("div");
+  toast.setAttribute("role", "status");
+  toast.setAttribute("aria-live", "polite");
+  toast.innerHTML = `✅ Ticket claimed! You can now contact the charity directly.`;
+  Object.assign(toast.style, {
+    position: "fixed", bottom: "24px", right: "24px",
+    background: "var(--bg-header-start)", color: "white",
+    padding: "16px 24px", borderRadius: "var(--radius-md)",
+    boxShadow: "var(--shadow-lg)", fontFamily: "var(--font-family-body)",
+    fontSize: "14px", fontWeight: "600", zIndex: "1100",
+    animation: "slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both",
+    maxWidth: "340px",
+  });
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
+
+// Legacy alias so old claimTicket(id) calls still work if present
+function claimTicket(id) {
+  activeTicketId = id;
+  claimTicketFromModal();
+}
+
+// ── Initialize volunteer portal on page load ───────────────────────────────────
+document.addEventListener("DOMContentLoaded", () => {
+  if (!document.getElementById("ticket-feed-container")) return;
+
+  renderTicketFeed();
+
+  // Sync claimed count stat
+  const claimedCount = getStoredTickets().filter(t => t.status === "Claimed").length;
+  const statEl = document.getElementById("active-claims-count");
+  if (statEl) statEl.textContent = `${claimedCount} Ticket${claimedCount !== 1 ? "s" : ""}`;
 });
 
 // ==========================================================================

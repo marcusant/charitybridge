@@ -1095,50 +1095,257 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
   gap: 8px;
 }
 
-.ticket-detail-pane {
-  position: sticky;
-  top: 24px;
-  max-height: calc(100vh - 90px);
+/* Ticket count badge next to the feed title */
+.ticket-count-badge {
+  margin-left: 8px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+}
+
+/* Single-column ticket feed grid on wider screens */
+@media (min-width: 640px) {
+  .ticket-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 16px;
+  }
+}
+
+/* ==========================================================================
+   Ticket Detail Modal
+   ========================================================================== */
+
+@keyframes modalBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalDialogIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)     scale(1); }
+}
+
+@keyframes modalDialogOut {
+  from { opacity: 1; transform: translateY(0)     scale(1); }
+  to   { opacity: 0; transform: translateY(20px)  scale(0.97); }
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(0, 0, 71, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalBackdropIn 0.25s ease both;
+}
+
+.modal-overlay.is-open {
+  display: flex;
+}
+
+.modal-overlay.is-closing {
+  animation: modalBackdropIn 0.2s ease reverse both;
+}
+
+.modal-dialog {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 32px 64px -12px rgba(0,0,71,0.35), 0 0 0 1px rgba(255,255,255,0.15);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalDialogIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-overlay.is-closing .modal-dialog {
+  animation: modalDialogOut 0.2s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(0, 0, 143, 0.04) 0%, rgba(168, 85, 247, 0.03) 100%);
+  flex-shrink: 0;
+}
+
+.modal-header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.modal-ngo-name {
+  font-family: var(--font-family-headings);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--bg-header-start);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.modal-meta {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-color);
+  background: white;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger-accent);
+  color: var(--color-danger-accent);
+  transform: scale(1.08);
+}
+
+/* Modal Body */
+.modal-body {
+  flex: 1;
   overflow-y: auto;
-  overflow-x: hidden;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   scrollbar-width: thin;
   scrollbar-color: var(--border-color) transparent;
 }
 
-.ticket-detail-pane::-webkit-scrollbar {
+.modal-body::-webkit-scrollbar {
   width: 5px;
 }
-.ticket-detail-pane::-webkit-scrollbar-track {
-  background: transparent;
-}
-.ticket-detail-pane::-webkit-scrollbar-thumb {
+.modal-body::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 99px;
 }
 
-.placeholder-detail {
-  background: white;
-  border: 2px dashed var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 48px 24px;
-  text-align: center;
-  color: var(--color-text-muted);
+.modal-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  min-height: 360px;
+  gap: 10px;
 }
 
-.placeholder-icon {
-  font-size: 48px;
-  opacity: 0.5;
-}
-
-.placeholder-text {
+.modal-desc-text {
   font-size: 14px;
+  color: var(--color-text-dark);
+  line-height: 1.65;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border-left: 3px solid var(--color-primary);
+}
+
+.modal-plan-list {
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.modal-plan-list li {
+  font-size: 13.5px;
+  color: var(--color-text-dark);
   line-height: 1.6;
+  padding-left: 4px;
+}
+
+.modal-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 520px) {
+  .modal-two-col {
+    grid-template-columns: 1fr;
+  }
+  .modal-header {
+    padding: 20px 20px 16px;
+  }
+  .modal-body {
+    padding: 20px;
+  }
+  .modal-footer {
+    padding: 16px 20px;
+  }
+  .modal-ngo-name {
+    font-size: 18px;
+  }
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 20px 28px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-input);
+  flex-shrink: 0;
+}
+
+.modal-claim-btn {
+  margin-top: 0 !important;
+  font-size: 15px;
+  padding: 16px;
+  letter-spacing: 0.2px;
+}
+
+/* Dark mode modal adjustments */
+@media (prefers-color-scheme: dark) {
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  .modal-dialog {
+    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.08);
+  }
+  .modal-close-btn {
+    background: #1e293b;
+    border-color: rgba(255,255,255,0.12);
+    color: var(--color-text-muted);
+  }
+  .modal-footer {
+    background: #0f172a;
+  }
 }
 
 @keyframes cardReveal {

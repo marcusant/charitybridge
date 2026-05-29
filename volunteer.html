@@ -33,7 +33,7 @@
   </div>
 </header>
 
-<main class="container vol-container">
+<main class="container">
   
   <!-- Dashboard Stats row -->
   <section class="dashboard-stats" aria-label="Volunteer Statistics Summary">
@@ -51,7 +51,7 @@
         <span class="stat-title">Active Claims</span>
         <span class="stat-icon"><span role="img" aria-label="open lock">🔓</span></span>
       </div>
-      <div class="stat-number">1 Ticket</div>
+      <div class="stat-number" id="active-claims-count">0 Tickets</div>
       <div class="stat-desc">Tasks currently in progress</div>
     </div>
     
@@ -65,62 +65,126 @@
     </div>
   </section>
 
-  <!-- Main Feed Layout -->
-  <div class="split-layout">
-    
-    <!-- Left Column: Search, Filters & Tickets Feed -->
-    <section aria-label="Available Support Tickets Feed">
-      
-      <div class="search-filter-container">
-        
-        <div class="search-box">
-          <span class="search-icon-absolute"><span role="img" aria-label="magnifying glass">🔍</span></span>
-          <input 
-            type="text" 
-            id="ticket-search" 
-            class="search-input" 
-            placeholder="Search tickets by charity, description or skill..."
-            oninput="filterTickets()"
-          />
-        </div>
-        
-        <div class="filter-scroll" id="filter-pills" aria-label="Filter tickets by category">
-          <button type="button" class="filter-btn active" onclick="setCategoryFilter('all')">All Specialities</button>
-          <button type="button" class="filter-btn" onclick="setCategoryFilter('cybersecurity')">Cybersecurity</button>
-          <button type="button" class="filter-btn" onclick="setCategoryFilter('it-infrastructure')">IT Infrastructure</button>
-          <button type="button" class="filter-btn" onclick="setCategoryFilter('finance')">Finance & Accounting</button>
-          <button type="button" class="filter-btn" onclick="setCategoryFilter('software')">Software & CRM</button>
-          <button type="button" class="filter-btn" onclick="setCategoryFilter('communications')">Communications</button>
-        </div>
-        
+  <!-- Search & Filters -->
+  <section aria-label="Search and filter support tickets">
+
+    <div class="search-filter-container">
+      <div class="search-box">
+        <span class="search-icon-absolute"><span role="img" aria-label="magnifying glass">🔍</span></span>
+        <input 
+          type="text" 
+          id="ticket-search" 
+          class="search-input" 
+          placeholder="Search tickets by charity, description or skill..."
+          oninput="filterTickets()"
+        />
       </div>
       
-      <div class="feed-title">
-        <span role="img" aria-label="ticket board">📋</span> Open Tickets Available
+      <div class="filter-scroll" id="filter-pills" aria-label="Filter tickets by category">
+        <button type="button" class="filter-btn active" onclick="setCategoryFilter('all')">All Specialities</button>
+        <button type="button" class="filter-btn" onclick="setCategoryFilter('cybersecurity')">Cybersecurity</button>
+        <button type="button" class="filter-btn" onclick="setCategoryFilter('it-infrastructure')">IT Infrastructure</button>
+        <button type="button" class="filter-btn" onclick="setCategoryFilter('finance')">Finance &amp; Accounting</button>
+        <button type="button" class="filter-btn" onclick="setCategoryFilter('software')">Software &amp; CRM</button>
+        <button type="button" class="filter-btn" onclick="setCategoryFilter('communications')">Communications</button>
       </div>
-      
-      <div class="ticket-feed" id="ticket-feed-container">
-        <!-- Tickets will be populated here via JavaScript -->
-      </div>
-      
-    </section>
-    
-    <!-- Right Column: Selected Ticket Details -->
-    <aside class="ticket-detail-pane" aria-label="Ticket detail expand and claiming panel">
-      <div id="ticket-detail-container">
-        <div class="placeholder-detail">
-          <span class="placeholder-icon"><span role="img" aria-label="empty document">📄</span></span>
-          <h4 style="font-family: var(--font-family-headings); font-size: 16px; font-weight: 700; color: var(--color-text-dark);">No Ticket Selected</h4>
-          <p class="placeholder-text">
-            Select a ticket from the left panel to review full AI analysis, suggested action plans, and claim it to start helping the nonprofit organization.
-          </p>
-        </div>
-      </div>
-    </aside>
-    
-  </div>
+    </div>
+
+    <div class="feed-title">
+      <span role="img" aria-label="ticket board">📋</span> Open Tickets Available
+      <span id="ticket-count-badge" class="ticket-count-badge"></span>
+    </div>
+
+    <!-- Ticket Feed (single column, full width) -->
+    <div class="ticket-feed" id="ticket-feed-container">
+      <!-- Tickets populated by JavaScript -->
+    </div>
+
+  </section>
 
 </main>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TICKET DETAIL MODAL
+     ═══════════════════════════════════════════════════════════ -->
+<div 
+  id="ticket-modal-overlay" 
+  class="modal-overlay" 
+  role="dialog" 
+  aria-modal="true" 
+  aria-labelledby="modal-ngo-name"
+  onclick="handleModalOverlayClick(event)"
+>
+  <div class="modal-dialog" id="ticket-modal-dialog">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div id="modal-tags" class="modal-tags-row"></div>
+        <h2 id="modal-ngo-name" class="modal-ngo-name"></h2>
+        <p id="modal-meta" class="modal-meta"></p>
+      </div>
+      <button 
+        type="button" 
+        class="modal-close-btn" 
+        onclick="closeTicketModal()" 
+        aria-label="Close ticket details"
+        id="modal-close-btn"
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- Modal Body (scrollable) -->
+    <div class="modal-body">
+
+      <div class="modal-section stagger-item delay-1">
+        <div class="detail-section-title">🤖 AI Problem Diagnosis</div>
+        <p id="modal-desc" class="modal-desc-text"></p>
+      </div>
+
+      <div class="modal-section stagger-item delay-2">
+        <div class="detail-section-title">📋 AI Suggested Response Plan</div>
+        <ol id="modal-plan" class="modal-plan-list"></ol>
+      </div>
+
+      <div class="modal-two-col">
+        <div class="modal-section stagger-item delay-3">
+          <div class="detail-section-title">🔧 Required Skills</div>
+          <div id="modal-skills" class="skills-list"></div>
+        </div>
+
+        <div class="modal-section stagger-item delay-4">
+          <div class="detail-section-title">📬 Charity Contact</div>
+          <div class="detail-contact-box">
+            <div class="contact-item">
+              <span class="contact-label">Email:</span>
+              <a id="modal-email-link" href="#" style="color:var(--color-primary); font-weight:600; text-decoration:none;"></a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Status:</span>
+              <span id="modal-status-text" style="font-weight:700;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer stagger-item delay-5">
+      <button 
+        type="button" 
+        class="btn-analyze modal-claim-btn" 
+        id="modal-claim-btn" 
+        onclick="claimTicketFromModal()"
+      >
+        🤝 Claim Ticket &amp; Contact Charity
+      </button>
+    </div>
+
+  </div>
+</div>
 
 <script src="app.js"></script>
 </body>
