@@ -1,153 +1,145 @@
-# 📋 Plano Detalhado de Tarefas - Charity Bridge
+# 📋 Detailed Task Plan - Charity Bridge
 
-Este documento divide o plano de ação em tarefas de desenvolvimento específicas, indicando os arquivos impactados, a complexidade de cada item e o critério de aceitação técnica.
-
----
-
-## 🎯 Fase 1: Fundação, Acessibilidade e Modularização
-
-### Tarefa 1.1: Extração e Criação do Sistema de Design (CSS)
-*   **Descrição**: Criar um arquivo CSS externo unificado para remover estilos inline e centralizar as definições visuais.
-*   **Arquivos Impactados**:
-    *   `[NEW]` `style.css` (Criação do arquivo)
-    *   `[MODIFY]` `NGO Portal.html` (Remoção da tag `<style>` e inclusão da tag `<link>`)
-*   **Especificações**:
-    *   Definir variáveis CSS (`:root`) para paleta de cores, tipografia, transições e espaçamentos.
-    *   Implementar a classe `.sr-only` para ocultação visual acessível.
-    *   Manter e aprimorar a responsividade existente.
-
-### Tarefa 1.2: Ajustes de Semântica e Acessibilidade (a11y)
-*   **Descrição**: Adaptar a estrutura HTML para cumprir com as diretrizes de acessibilidade e semântica moderna.
-*   **Arquivos Impactados**:
-    *   `[MODIFY]` `NGO Portal.html`
-*   **Especificações**:
-    *   Adicionar `<main>` em volta do contêiner principal.
-    *   Adicionar `<fieldset>` e `<legend>` no grupo de botões de urgência.
-    *   Substituir `display: none` do input de rádio de urgência por `.sr-only` e ajustar os estilos dos labels para focar visualmente quando o input correspondente for selecionado via teclado.
-    *   Envolver todos os emojis em `<span role="img" aria-label="...">`.
-
-### Tarefa 1.3: Otimizações de SEO e Metadados
-*   **Descrição**: Adicionar tags fundamentais na seção `<head>` para otimização em motores de busca e compartilhamento social.
-*   **Arquivos Impactados**:
-    *   `[MODIFY]` `NGO Portal.html`
-*   **Especificações**:
-    *   Adicionar tag `<meta name="description">` descritiva.
-    *   Adicionar tags essenciais Open Graph (`og:title`, `og:description`, `og:image`).
+This document divides the platform action plan into specific development tasks, indicating the impacted files, complexity level, and technical acceptance criteria.
 
 ---
 
-## 🎨 Fase 2: Refinamento de UI/UX e Validação
+## 🎯 Phase 1: Foundation, Accessibility, and Modularization
 
-### Tarefa 2.1: Validação de Formulário Inline (JS)
-*   **Descrição**: Substituir a validação via `alert()` por mensagens visuais acopladas aos inputs do formulário.
-*   **Arquivos Impactados**:
+### Task 1.1: Design System Extraction and Creation (CSS)
+*   **Description**: Create a unified external CSS file to remove all inline styles and centralize design variables.
+*   **Impacted Files**:
+    *   `[NEW]` `style.css` (Stylesheet creation)
+    *   `[MODIFY]` `NGO Portal.html` (Removal of the internal `<style>` tag and inclusion of `<link>`)
+*   **Specifications**:
+    *   Define `:root` CSS custom variables for color palette, typography scales, transitions, and spacings.
+    *   Implement the `.sr-only` class for visually accessible off-screen hiding.
+    *   Maintain and polish the existing responsive layout grid.
+
+### Task 1.2: Semantic HTML & Accessibility Adjustments (a11y)
+*   **Description**: Adapt the HTML DOM to comply with accessibility standards and modern structures.
+*   **Impacted Files**:
     *   `[MODIFY]` `NGO Portal.html`
-*   **Especificações**:
-    *   Criar contêineres de erro (`<span class="error-msg">`) ocultos sob cada input obrigatório.
-    *   Ao submeter, se houver erro, exibir a mensagem apropriada em vermelho, focar no primeiro campo inválido e impedir a submissão.
-    *   Limpar o estado de erro assim que o usuário começar a digitar no campo inválido.
+*   **Specifications**:
+    *   Wrap main content container in a structural `<main>` element.
+    *   Group urgency choice radio triggers inside a proper `<fieldset>` with `<legend>`.
+    *   Replace inaccessible `display: none` radio button styles with an off-screen `.sr-only` setup, adjusting focus ring styling under `:focus-visible` on the labels.
+    *   Wrap all graphical emojis across the DOM inside a `<span role="img" aria-label="...">` tag with clear English labels.
 
-### Tarefa 2.2: Implementação da Função de Demonstração (Preenchimento Rápido)
-*   **Descrição**: Evitar que o formulário venha pré-preenchido permanentemente. Usar placeholders e disponibilizar um botão para preencher exemplos automaticamente.
-*   **Arquivos Impactados**:
+### Task 1.3: SEO and Metadata Optimizations
+*   **Description**: Add structural tags to `<head>` for optimal search engine crawling and visual social sharing cards.
+*   **Impacted Files**:
     *   `[MODIFY]` `NGO Portal.html`
-*   **Especificações**:
-    *   Remover os valores pré-definidos (`value="..."` e textos internos das tags `<textarea>`) do formulário inicial.
-    *   Adicionar um botão discreto de estilo elegante "Preencher Exemplo" no topo do formulário.
-    *   Ao clicar, preencher dinamicamente os campos com dados de teste.
+*   **Specifications**:
+    *   Inject custom descriptive `<meta name="description">`.
+    *   Add essential Open Graph tags (`og:title`, `og:description`, `og:image`).
 
-### Tarefa 2.3: Micro-animações e Transições CSS
-*   **Descrição**: Adicionar toques visuais refinados para tornar a interface mais dinâmica e viva.
-*   **Arquivos Impactados**:
+---
+
+## 🎨 Phase 2: UI/UX Refinement and Form Validation
+
+### Task 2.1: Inline Form Validation (JS)
+*   **Description**: Replace legacy blocking browser `alert()` triggers with visual inline error banners under individual inputs.
+*   **Impacted Files**:
+    *   `[MODIFY]` `NGO Portal.html`
+*   **Specifications**:
+    *   Create error container spans `<span class="error-message">` beneath obligatory fields.
+    *   Upon form submission, visually highlight invalid fields, focus dynamically on the first failing input, and block execution.
+    *   Wipe error indicators instantly upon input event triggers as the user starts typing.
+
+### Task 2.2: Demo Trigger Implementation (Auto-Fill)
+*   **Description**: Avoid permanent hardcoded placeholder input data. Provide placeholders and a clean demo button.
+*   **Impacted Files**:
+    *   `[MODIFY]` `NGO Portal.html`
+*   **Specifications**:
+    *   Wipe default hardcoded values from initial form text fields and textareas.
+    *   Provide a sleek, premium "✨ Fill Example" button.
+    *   Hook up dynamic mock inputs upon button click.
+
+### Task 2.3: CSS Transitions and Hover Micro-animations
+*   **Description**: Integrate micro-interactions to breathe life into the platform.
+*   **Impacted Files**:
     *   `[MODIFY]` `style.css`
-*   **Especificações**:
-    *   Efeito de elevação suave (`transform: translateY(-4px)`) nos cards e pílulas ao passar o mouse.
-    *   Efeito de *pulse* aprimorado no ponto indicador de status do ticket.
-    *   Aparência de revelação suave (fade-in) nos resultados.
+*   **Specifications**:
+    *   Add smooth translations on hover (`transform: translateY(-4px)`) for cards.
+    *   Polish pulse status animations on tickets.
+    *   Introduce stagger animations on ticket lists.
 
 ---
 
-## 👥 Fase 3: Portal do Voluntário (`volunteer.html`)
+## 👥 Phase 3: Volunteer Portal (`volunteer.html`)
 
-### Tarefa 3.1: Redesenho Estrutural da Visão do Voluntário
-*   **Descrição**: Transformar o arquivo duplicado em uma aplicação totalmente focada na experiência do voluntário.
-*   **Arquivos Impactados**:
-    *   `[MODIFY]` `volunteer.html` (Sobrescrever a cópia idêntica)
-*   **Especificações**:
-    *   Substituir o formulário de cadastro por um painel de controle do voluntário (*Dashboard*).
-    *   Exibir estatísticas (Ex: chamados aceitos, horas acumuladas, competências cadastradas).
+### Task 3.1: Structural Redesign of Volunteer Interface
+*   **Description**: Transform the cloned page copy into an interactive dashboard tailored for volunteers.
+*   **Impacted Files**:
+    *   `[MODIFY]` `volunteer.html` (Overwrite identical clone)
+*   **Specifications**:
+    *   Replace registration elements with a clean statistics dashboard (Hours Contributed, Active Claims, Profile Accuracy).
 
-### Tarefa 3.2: Fila de Chamados e Filtros
-*   **Descrição**: Implementar a listagem de chamados abertos das ONGs e controles para triagem.
-*   **Arquivos Impactados**:
+### Task 3.2: Ticket Queue Feed and Filters
+*   **Description**: Render active open tickets with dynamic category filters and keyword searches.
+*   **Impacted Files**:
     *   `[MODIFY]` `volunteer.html`
-*   **Especificações**:
-    *   Listar chamados com cartões informativos (ONG, descrição resumida, urgência e afinidade de habilidades).
-    *   Criar botões de filtro por categoria (Ex: "Cybersecurity", "Finance").
-    *   Permitir a busca textual por palavras-chave na fila de chamados.
+*   **Specifications**:
+    *   List open tickets displaying NGO name, category tags, urgency pill highlights, and summaries.
+    *   Provide horizontal category selection filter pills (e.g. Cybersecurity, IT Infrastructure, Finance).
+    *   Configure text input search filters.
 
-### Tarefa 3.3: Visualização do Chamado e Candidatura
-*   **Descrição**: Permitir ao voluntário ver os detalhes completos de um problema e aceitar a tarefa.
-*   **Arquivos Impactados**:
+### Task 3.3: Ticket Details Card and Task Claiming
+*   **Description**: Allow volunteers to view detailed AI analysis, suggested responses, and claim the task.
+*   **Impacted Files**:
     *   `[MODIFY]` `volunteer.html`
-*   **Especificações**:
-    *   Criar uma área ou modal de visualização expandida contendo o diagnóstico inicial da IA e os passos de mitigação sugeridos.
-    *   Adicionar um botão proeminente "Aceitar Ticket e Contatar ONG".
-    *   Ao aceitar, atualizar o status do chamado e exibir informações de contato direto.
+*   **Specifications**:
+    *   Build an expand details pane rendering AI suggested response guides, matching volunteer skills, and NGO email addresses.
+    *   Add a prominent "Claim Ticket" action button.
+    *   Enable claiming workflows, changing ticket status dynamically and incrementing statistic metrics.
 
 ---
 
-## 🧠 Fase 4: Inteligência Local e Integração de Fluxos
+## 🧠 Phase 4: Local AI Engine and Storage Integration
 
-### Tarefa 4.1: Extração e Criação da Lógica Dinâmica (JS)
-*   **Descrição**: Mover todo o código JavaScript para um arquivo separado e centralizado.
-*   **Arquivos Impactados**:
+### Task 4.1: Extraction and Creation of Unified Dynamic Logic (JS)
+*   **Description**: Move all script segments to a single unlinked external script.
+*   **Impacted Files**:
     *   `[NEW]` `app.js`
-    *   `[MODIFY]` `NGO Portal.html` (Remoção da tag `<script>` interna e importação de `app.js`)
-    *   `[MODIFY]` `volunteer.html` (Importação de `app.js`)
+    *   `[MODIFY]` `NGO Portal.html` (Wipe script tag, import `app.js`)
+    *   `[MODIFY]` `volunteer.html` (Import `app.js`)
 
-### Tarefa 4.2: Classificador de IA Dinâmico baseado em Conteúdo
-*   **Descrição**: Criar um motor de classificação simples em JavaScript que analise o texto digitado pelas ONGs em vez de depender estritamente do dropdown manual.
-*   **Arquivos Impactados**:
+### Task 4.2: Content-Based Dynamic AI Classifier
+*   **Description**: Create a semantic regex keyword triage engine to predict categories dynamically when the "Let AI decide" option is active.
+*   **Impacted Files**:
     *   `[MODIFY]` `app.js`
-*   **Especificações**:
-    *   Pesquisar por palavras-chave na descrição do problema (Ex: "hacked", "vírus", "senha", "roubo" direcionam para *Cybersecurity*; "servidor", "internet", "nuvem", "lento" direcionam para *IT Infrastructure*).
-    *   Selecione o cenário correspondente de forma automatizada no motor de diagnósticos se a opção "Let AI decide" estiver ativa.
+*   **Specifications**:
+    *   Scan inputs for keyword clusters (e.g. "hacked", "phishing" assign to Cybersecurity).
+    *   Auto-select predicted category and render response plans.
 
-### Tarefa 4.3: Sincronização em Tempo Real via localStorage
-*   **Descrição**: Conectar o fluxo de criação de chamados da ONG com a fila do voluntário de forma persistente.
-*   **Arquivos Impactados**:
+### Task 4.3: Real-time Cross-Portal localStorage Synchronization
+*   **Description**: Bind ticket submissions and status updates dynamically across client tabs.
+*   **Impacted Files**:
     *   `[MODIFY]` `app.js`
-*   **Especificações**:
-    *   Ao submeter um chamado com sucesso no Portal da ONG, salvar o objeto do ticket criado no `localStorage` sob uma chave `charity_bridge_tickets`.
-    *   No Portal do Voluntário, carregar a lista de chamados diretamente do `localStorage` para exibição na fila.
-    *   Ao aceitar um ticket no Portal do Voluntário, atualizar o estado dele no `localStorage` (alterando o status de "Aberto" para "Em Andamento" e vinculando o voluntário) de forma que essa mudança persista ao retornar à visualização.
+*   **Specifications**:
+    *   Push new NGO ticket objects into a shared `charity_bridge_tickets` local array upon creation.
+    *   Synchronize stats counters and disabled claim states instantly.
 
 ---
 
-## 🚀 Fase 5: Integração GitHub & Deploy Vercel
+## 🚀 Phase 5: GitHub Integration & Vercel Deployment
 
-### Tarefa 5.1: Criação da Landing Splash Hub (`index.html`)
-*   **Descrição**: Desenvolver uma página inicial de entrada atraente que direcione os usuários para as três principais visões da aplicação, atendendo ao requisito padrão de servidores como GitHub Pages e Vercel.
-*   **Arquivos Impactados**:
-    *   `[NEW]` `index.html` (Criação da Landing Page central)
-*   **Especificações**:
-    *   Layout responsivo e premium, utilizando glassmorfismo e o mesmo sistema de design de `style.css`.
-    *   Seções de chamada para ação direcionando para: Portal da ONG, Portal do Voluntário e Apresentação do Projeto.
-    *   Introdução rápida dos objetivos do Charity Bridge.
+### Task 5.1: Landing Splash Hub Creation (`index.html`)
+*   **Description**: Build a premium entrance splash portal linking all visual vistas of the ecosystem, supporting server entry requirements.
+*   **Impacted Files**:
+    *   `[NEW]` `index.html`
+*   **Specifications**:
+    *   Develop a glassmorphic dashboard hub linking to: NGO Portal, Volunteer Dashboard, and Slides presentation.
 
-### Tarefa 5.2: Arquivo de Configuração da Vercel (`vercel.json`)
-*   **Descrição**: Criar regras de reescrita para habilitar URLs amigáveis sem a necessidade de exibir a extensão `.html`.
-*   **Arquivos Impactados**:
+### Task 5.2: Vercel Route Configuration (`vercel.json`)
+*   **Description**: Establish server rewrites supporting clean URLs.
+*   **Impacted Files**:
     *   `[NEW]` `vercel.json`
-*   **Especificações**:
-    *   Habilitar `cleanUrls: true`.
-    *   Definir regras básicas de roteamento estático.
+*   **Specifications**:
+    *   Enable `cleanUrls: true` at the root.
 
-### Tarefa 5.3: Preparação do Repositório Git & Deploy
-*   **Descrição**: Inicializar o repositório git local, estruturar commits semânticos em inglês e realizar a publicação no GitHub conectada ao deploy automático da Vercel.
-*   **Arquivos Impactados**:
-    *   Criação de `.gitignore` (excluindo arquivos de cache do IDE).
-*   **Especificações**:
-    *   Garantir a ausência de quaisquer referências absolutas de disco local antes do push final.
-
+### Task 5.3: Git Repository Setup & Deploy
+*   **Description**: Initialize local git tracking, compile staged files, and push to GitHub linked to automated Vercel deploys.
+*   **Impacted Files**:
+    *   Create `.gitignore`.

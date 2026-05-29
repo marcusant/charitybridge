@@ -1,100 +1,91 @@
-# 📈 Controle de Progresso - Charity Bridge
+# 📈 Progress Tracking - Charity Bridge
 
-Este arquivo serve como o painel de status em tempo real do desenvolvimento do projeto **Charity Bridge**. Ele será atualizado continuamente conforme avançarmos nas tarefas especificadas no `task_plan.md`.
-
----
-
-## 📊 Status Geral do Projeto
-
-*   **Fase Atual**: `Fase 5: Integração GitHub & Deploy Vercel`
-*   **Progresso Estimado**: `95%`
-*   **Última Atualização**: `2026-05-29`
-
-
+This file serves as the real-time status dashboard for the development of the **Charity Bridge** project. It is updated continuously as we advance through the tasks specified in `task_plan.md`.
 
 ---
 
-## 📝 Painel de Progresso Detalhado
+## 📊 Overall Project Status
 
-### 🎯 Fase 1: Fundação, Acessibilidade e Modularização
-*   [x] **Tarefa 1.1**: Extração e Criação do Sistema de Design (CSS) `[Concluído]`
-    *   *Meta*: Criar `style.css` e migrar estilos de `NGO Portal.html`.
-*   [x] **Tarefa 1.2**: Ajustes de Semântica e Acessibilidade (a11y) `[Concluído]`
-    *   *Meta*: Envolver elementos em tags semânticas, corrigir os botões de rádio de urgência para uso acessível por teclado, adicionar `aria-label` e `role` em emojis.
-*   [x] **Tarefa 1.3**: Otimizações de SEO e Metadados `[Concluído]`
-    *   *Meta*: Configurar meta description e Open Graph no `<head>`.
+*   **Current Phase**: `Phase 5: GitHub Integration & Vercel Deployment`
+*   **Estimated Progress**: `100%`
+*   **Last Updated**: `2026-05-29`
 
 ---
 
-### 🎨 Fase 2: Refinamento de UI/UX e Validação
-*   [x] **Tarefa 2.1**: Validação de Formulário Inline (JS) `[Concluído]`
-    *   *Meta*: Remover o uso de `alert()` e introduzir erros dinâmicos em linha.
-*   [x] **Tarefa 2.2**: Implementação da Função de Demonstração (Preenchimento Rápido) `[Concluído]`
-    *   *Meta*: Limpar valores padrão e criar o botão de preenchimento inteligente.
-*   [x] **Tarefa 2.3**: Micro-animações e Transições CSS `[Concluído]`
-    *   *Meta*: Adicionar animações suaves de entrada, estados de hover nos cards e efeitos de status.
+## 📝 Detailed Progress Dashboard
+
+### 🎯 Phase 1: Foundation, Accessibility, and Modularization
+*   [x] **Task 1.1**: Design System Extraction and Creation (CSS) `[Completed]`
+    *   *Goal*: Create `style.css` and migrate styles from `NGO Portal.html`.
+*   [x] **Task 1.2**: Semantic HTML & Accessibility Adjustments (a11y) `[Completed]`
+    *   *Goal*: Wrap elements in semantic tags, configure keyboard-accessible urgency choices via off-screen `.sr-only` inputs, and add descriptive `aria-label` tags to emojis.
+*   [x] **Task 1.3**: SEO and Metadata Optimizations `[Completed]`
+    *   *Goal*: Add meta description, Open Graph, and Twitter tags in `<head>`.
 
 ---
 
-### 👥 Fase 3: Portal do Voluntário (`volunteer.html`)
-*   [x] **Tarefa 3.1**: Redesenho Estrutural da Visão do Voluntário `[Concluído]`
-    *   *Meta*: Substituir a página clonada por uma interface de Dashboard com estatísticas.
-*   [x] **Tarefa 3.2**: Fila de Chamados e Filtros `[Concluído]`
-    *   *Meta*: Implementar listagem dinâmica de tickets abertos, filtros por área e pesquisa.
-*   [x] **Tarefa 3.3**: Visualização do Chamado e Candidatura `[Concluído]`
-    *   *Meta*: Criar modal/seção de detalhes do ticket com opção de candidatura imediata.
+### 🎨 Phase 2: UI/UX Refinement and Form Validation
+*   [x] **Task 2.1**: Inline Form Validation (JS) `[Completed]`
+    *   *Goal*: Eliminate native browser `alert()` triggers, introducing visual inline error banners.
+*   [x] **Task 2.2**: Demo Trigger Implementation (Auto-Fill) `[Completed]`
+    *   *Goal*: Remove hardcoded placeholder values, providing a quick "✨ Fill Example" demo button.
+*   [x] **Task 2.3**: CSS Transitions and Hover Micro-animations `[Completed]`
+    *   *Goal*: Add smooth hover elevations to cards and linear gradients on buttons.
 
 ---
 
-### 🧠 Fase 4: Inteligência Local e Integração de Fluxos
-*   [x] **Tarefa 4.1**: Extração e Criação da Lógica Dinâmica (JS) `[Concluído]`
-    *   *Meta*: Criar `app.js` e linká-lo de forma limpa nos arquivos HTML.
-*   [x] **Tarefa 4.2**: Classificador de IA Dinâmico baseado em Conteúdo `[Concluído]`
-    *   *Meta*: Criar classificador JS por palavras-chave para problemas ("Let AI decide").
-*   [x] **Tarefa 4.3**: Sincronização em Tempo Real via localStorage `[Concluído]`
-    *   *Meta*: Armazenar tickets e sincronizar dados entre os portais da ONG e do Voluntário.
+### 👥 Phase 3: Volunteer Portal (`volunteer.html`)
+*   [x] **Task 3.1**: Structural Redesign of Volunteer Interface `[Completed]`
+    *   *Goal*: Replace the cloned page with an statistics-driven Dashboard.
+*   [x] **Task 3.2**: Ticket Queue Feed and Filters `[Completed]`
+    *   *Goal*: Render active tickets dynamically with search inputs and category filters.
+*   [x] **Task 3.3**: Ticket Details Card and Task Claiming `[Completed]`
+    *   *Goal*: Build dynamic details sections showing AI diagnosis, required skills, and claim action alerts.
 
 ---
 
-### 📺 Fase Extra: Deck de Apresentação Interativo (`presentation.html`)
-*   [x] **Tarefa Extra 1**: Criação do Deck de Slides Interativo `[Concluído]`
-    *   *Meta*: Criar `presentation.html` com layout de slides e suporte para navegação por teclado.
-*   [x] **Tarefa Extra 2**: Fluxograma de Simulação Interativa `[Concluído]`
-    *   *Meta*: Implementar animação sequencial simulando a sincronização de chamados.
-*   [x] **Tarefa Extra 3**: Links de Acesso nos Cabeçalhos `[Concluído]`
-    *   *Meta*: Adicionar botões nos cabeçalhos de ambos os portais ligando à apresentação.
+### 🧠 Phase 4: Local AI Engine and Storage Integration
+*   [x] **Task 4.1**: Extraction and Creation of Unified Dynamic Logic (JS) `[Completed]`
+    *   *Goal*: Create `app.js` and link it as an external modular script across portals.
+*   [x] **Task 4.2**: Content-Based Dynamic AI Classifier `[Completed]`
+    *   *Goal*: Build a regex keyword semantic triage engine to auto-classify categories.
+*   [x] **Task 4.3**: Real-time Cross-Portal localStorage Synchronization `[Completed]`
+    *   *Goal*: Save and synchronize ticket objects, claimed counters, and status updates across client portals.
 
 ---
 
-### 🚀 Fase 5: Integração GitHub & Deploy Vercel
-*   [x] **Tarefa 5.1**: Criação da Landing Splash Hub (`index.html`) `[Concluído]`
-    *   *Meta*: Desenvolver a página de boas-vindas inicial interligando todo o ecossistema.
-*   [x] **Tarefa 5.2**: Arquivo de Configuração da Vercel (`vercel.json`) `[Concluído]`
-    *   *Meta*: Configurar URL amigáveis (sem exibir a extensão .html) no build final.
-*   [/] **Tarefa 5.3**: Preparação do Repositório Git & Deploy `[Em Execução]`
-    *   *Meta*: Inicializar Git local, publicar no GitHub e conectar o pipeline automático à Vercel.
+### 📺 Extra Phase: Interactive Platform Presentation (`presentation.html`)
+*   [x] **Extra Task 1**: Interactive Slide Deck Creation `[Completed]`
+    *   *Goal*: Develop `presentation.html` with sliding decks and Left/Right keyboard navigation support.
+*   [x] **Extra Task 2**: Simulated Data Lifecycle Flowchart `[Completed]`
+    *   *Goal*: Animate sequential glowing pipeline nodes tracking data flows.
+*   [x] **Extra Task 3**: Header Shortcut Shortcuts `[Completed]`
+    *   *Goal*: Inject direct link buttons in the headers of all HTML portals.
 
 ---
 
-## 🪵 Histórico de Entregas (Log de Atividades)
+### 🚀 Phase 5: GitHub Integration & Vercel Deployment
+*   [x] **Task 5.1**: Landing Splash Hub Creation (`index.html`) `[Completed]`
+    *   *Goal*: Develop the entry welcomes landing page linking the entire platform ecosystem.
+*   [x] **Task 5.2**: Vercel Route Configuration (`vercel.json`) `[Completed]`
+    *   *Goal*: Setup clean URL routing without exposing file extensions in production.
+*   [x] **Task 5.3**: Git Repository Setup & Deploy `[Completed]`
+    *   *Goal*: Initialize a local git repository, commit all assets, push to GitHub, and hook up auto-build deploys to Vercel.
 
-*(As atividades concluídas serão registradas aqui em ordem cronológica reversa).*
+---
+
+## 🪵 Delivery Log (Activity History)
+
+*(Completed activities are logged here in reverse chronological order).*
 
 *   **2026-05-29**:
-    *   Desenvolvimento da **Fase 5: Integração GitHub & Deploy Vercel**.
-    *   Criação de [index.html](file:///C:/dev/Charity%20Bridge/index.html) como página inicial de entrada (*Landing Splash Hub*) integrando os portais da ONG, do voluntário e os slides de apresentação.
-    *   Configuração do roteamento de URLs limpas no arquivo de build [vercel.json](file:///C:/dev/Charity%20Bridge/vercel.json).
-    *   Inicialização do repositório Git local (`git init`) e criação do arquivo de exclusões [.gitignore](file:///C:/dev/Charity%20Bridge/.gitignore) para preparo do push para o GitHub.
-    *   Desenvolvimento da **Fase Extra: Deck de Apresentação Interativo**.
-    *   Criação de [presentation.html](file:///C:/dev/Charity%20Bridge/presentation.html) com 6 slides contendo metas, desafios, stack visual e fluxograma de ciclo de vida.
-    *   Integração do fluxograma de simulação no slide 5 iluminando os nós sequencialmente (`highlightNode`, `highlightArrow`).
-    *   Adicionados atalhos no teclado (setas ← e →) para troca rápida de slides.
-    *   Inserção do botão **"📺 Project Presentation"** nos cabeçalhos de `NGO Portal.html` e `volunteer.html`.
-    *   Conclusão da **Fase 4: Inteligência Local e Integração de Fluxos**.
-    *   Centralização do código dinâmico no script externo unificado `app.js`.
-    *   Implementação do classificador semântico dinâmico em JS simulando modelo de IA baseado em regex.
-    *   Estabelecimento da sincronização em tempo real via `localStorage` (sincronizando criação de tickets, candidatura e atualização dinâmica dos painéis estatísticos).
-    *   Análise detalhada do código legado.
-    *   Criação das diretrizes globais do projeto (`rules.md`).
-    *   Elaboração do plano de execução técnica (`task_plan.md`).
-    *   Inicialização do painel de progresso (`progress.md`).
+    *   Completed **Phase 5: GitHub Integration & Vercel Deployment**.
+    *   Committed and **pushed repository source code to remote GitHub** (`https://github.com/marcusant/charitybridge.git`), linking the main branch.
+    *   Created welcome hub [index.html](file:///C:/dev/Charity%20Bridge/index.html) and [vercel.json](file:///C:/dev/Charity%20Bridge/vercel.json) for production clean URLs.
+    *   Initialized local git repository and staged clean files with a comprehensive [.gitignore](file:///C:/dev/Charity%20Bridge/.gitignore).
+    *   Wrote the repository [README.md](file:///C:/dev/Charity%20Bridge/README.md) file.
+    *   Completed **Extra Phase: Interactive Platform Presentation**.
+    *   Created slide deck [presentation.html](file:///C:/dev/Charity%20Bridge/presentation.html) and automated flowchart simulation timers.
+    *   Completed **Phase 4: Local AI Engine and Storage Integration**.
+    *   Created unified external logic modular script [app.js](file:///C:/dev/Charity%20Bridge/app.js) with semantic classifiers.
+    *   Initial documentation setup, rules establishment ([rules.md](file:///C:/dev/Charity%20Bridge/rules.md)), task detailing ([task_plan.md](file:///C:/dev/Charity%20Bridge/task_plan.md)), and progress initialization ([progress.md](file:///C:/dev/Charity%20Bridge/progress.md)).
