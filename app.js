@@ -598,32 +598,32 @@ function selectTicket(id) {
 
   detailContainer.innerHTML = `
     <div class="detail-card">
-      <div>
+      <div class="stagger-item delay-1">
         <span class="tag tag-category" style="display:inline-flex; margin-bottom: 12px;"><span role="img" aria-label="tag">🏷️</span> ${ticket.category}</span>
         <h2 style="font-family: var(--font-family-headings); font-size: 20px; font-weight: 700; color: var(--bg-header-start);">${ticket.ngo}</h2>
         <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 4px;">Location: ${ticket.country} • ID: ${ticket.id}</p>
       </div>
 
-      <div>
+      <div class="stagger-item delay-2">
         <div class="detail-section-title">AI Problem Diagnosis</div>
         <p style="font-size: 14px; color: var(--color-text-dark); line-height: 1.6;">${ticket.desc}</p>
       </div>
 
-      <div>
+      <div class="stagger-item delay-3">
         <div class="detail-section-title"><span role="img" aria-label="bullet checklist">📋</span> AI Suggested Response Plan</div>
         <ul style="padding-left: 20px; display:flex; flex-direction:column; gap:8px;">
           ${ticket.plan.map(p => `<li style="font-size:13px; color:var(--color-text-dark); line-height:1.5;">${p}</li>`).join("")}
         </ul>
       </div>
 
-      <div>
+      <div class="stagger-item delay-4">
         <div class="detail-section-title">Required Skills</div>
         <div class="skills-list">
           ${ticket.skills.map(s => `<span class="skill-pill"><span role="img" aria-label="wrench">🔧</span> ${s}</span>`).join("")}
         </div>
       </div>
 
-      <div>
+      <div class="stagger-item delay-5">
         <div class="detail-section-title">Charity Contact Information</div>
         <div class="detail-contact-box">
           <div class="contact-item">
@@ -639,7 +639,7 @@ function selectTicket(id) {
 
       <button 
         type="button" 
-        class="btn-apply" 
+        class="btn-apply stagger-item delay-6" 
         id="claim-btn-${ticket.id}" 
         onclick="claimTicket('${ticket.id}')"
         ${isClaimed ? "disabled" : ""}

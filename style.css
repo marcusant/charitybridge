@@ -1134,6 +1134,20 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Staggered Item Animations for premium interactive entry */
+.stagger-item {
+  opacity: 0;
+  animation: slideFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.10s; }
+.delay-3 { animation-delay: 0.15s; }
+.delay-4 { animation-delay: 0.20s; }
+.delay-5 { animation-delay: 0.25s; }
+.delay-6 { animation-delay: 0.30s; }
+
+
 .detail-section-title {
   font-family: var(--font-family-headings);
   font-size: 12px;

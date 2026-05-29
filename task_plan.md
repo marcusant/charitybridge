@@ -157,3 +157,13 @@ This document divides the platform action plan into specific development tasks, 
 *   **Specifications**:
     *   All visual elements, labels, code statements, comments, logs, and files must be in English.
     *   Keep documentation and action plans synchronous with the code to ensure zero tracking lag.
+
+### Task 6.2: Staggered Micro-Animations for Ticket Details
+*   **Description**: Improve visual interactivity when selecting open tickets in the volunteer portal by animating detail subsections sequentially rather than all at once.
+*   **Impacted Files**:
+    *   `[MODIFY]` `style.css` (Add staggered slideFadeIn animation definitions)
+    *   `[MODIFY]` `app.js` (Inject stagger classes into selected ticket markup)
+*   **Specifications**:
+    *   Add `.stagger-item` and `.delay-1` to `.delay-6` classes using slideFadeIn animations.
+    *   Apply classes to the categories, diagnosis, response list, matched skills, contact info box, and action button to animate them sequentially.
+
