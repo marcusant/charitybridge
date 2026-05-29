@@ -3,7 +3,8 @@
 This document gathers the standards, best practices, and mandatory quality requirements for the development of the **Charity Bridge** project. Any code modification must strictly adhere to these guidelines to ensure that the platform is accessible, performant, and easy to maintain.
 
 > [!IMPORTANT]
-> **Application Language**: All user interface content (display text, labels, buttons, error messages, placeholders, simulated feedback, and accessibility descriptions) must be implemented **strictly in English (en)**.
+> * **Strict English Policy**: All user interface content (display text, labels, buttons, error messages, placeholders, simulated feedback, and accessibility descriptions) and all written code (including comments, logs, and development files) must be implemented **strictly in English (en)**.
+> * **Synchronous Documentation Updates**: Any codebase alteration, feature update, or technology stack change must be immediately and synchronously updated across the project tracking files: `task_plan.md`, `progress.md`, and `rules.md`.
 
 ---
 
@@ -91,7 +92,15 @@ To ensure that the application can be built, published to GitHub, and hosted suc
 
 ---
 
-## 📊 5. Commit Checklist
+## 📝 5. Documentation Maintenance & Tracking
+
+To ensure that the project state and engineering choices remain perfectly aligned:
+* **Tracking Synchronicity**: Whenever any part of the application code, technology stack, features, or assets are modified or updated, the accompanying tracking documents (`task_plan.md`, `progress.md`, and `rules.md` themselves) must be updated synchronously to reflect those changes.
+* **Written Standard**: Absolutely everything written from now on in the application, repository, or documentation must be in English.
+
+---
+
+## 📊 6. Commit Checklist
 
 Before finalizing any task and closing the activity, verify:
 1. [ ] Is the HTML valid and free of structural syntax errors?
@@ -101,3 +110,4 @@ Before finalizing any task and closing the activity, verify:
 5. [ ] Does the layout remain readable and visually sound in mobile resolutions (e.g., 375px)?
 6. [ ] Are there any remaining `alert()` calls in the code?
 7. [ ] Do all internal links and file references use relative paths compatible with Vercel deployment?
+8. [ ] Have `task_plan.md`, `progress.md`, and `rules.md` been updated to match any modifications made during this task?

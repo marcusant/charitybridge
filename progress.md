@@ -77,8 +77,8 @@ This file serves as the real-time status dashboard for the development of the **
 ## 🪵 Delivery Log (Activity History)
 
 *(Completed activities are logged here in reverse chronological order).*
-
 *   **2026-05-29**:
+    *   Updated `rules.md` to integrate **Strict English Policy** and **Synchronous Documentation Updates** requirements.
     *   Completed **Phase 5: GitHub Integration & Vercel Deployment**.
     *   Committed and **pushed repository source code to remote GitHub** (`https://github.com/marcusant/charitybridge.git`), linking the main branch.
     *   Created welcome hub [index.html](file:///C:/dev/Charity%20Bridge/index.html) and [vercel.json](file:///C:/dev/Charity%20Bridge/vercel.json) for production clean URLs.

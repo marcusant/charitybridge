@@ -143,3 +143,17 @@ This document divides the platform action plan into specific development tasks, 
 *   **Description**: Initialize local git tracking, compile staged files, and push to GitHub linked to automated Vercel deploys.
 *   **Impacted Files**:
     *   Create `.gitignore`.
+
+---
+
+## 📝 Phase 6: Long-term Maintenance & Documentation Rules
+
+### Task 6.1: Documentation & Translation Standards Enacted
+*   **Description**: Define rules ensuring that any stack, codebase, or feature update triggers simultaneous updates to tracking documentation and all new code/comments remain strictly in English.
+*   **Impacted Files**:
+    *   `[MODIFY]` `rules.md` (Update rules guidelines)
+    *   `[MODIFY]` `progress.md` (Log tracking updates)
+    *   `[MODIFY]` `task_plan.md` (Integrate phase details)
+*   **Specifications**:
+    *   All visual elements, labels, code statements, comments, logs, and files must be in English.
+    *   Keep documentation and action plans synchronous with the code to ensure zero tracking lag.
