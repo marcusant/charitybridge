@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Cores Principais - Paleta HSL Premium */
+  /* Cores Principais - Paleta AXA Brand Colors */
   --bg-primary: #f8fafc; /* Slate 50 */
   --bg-card: #ffffff;
-  --bg-header-start: #0f172a; /* Slate 900 */
-  --bg-header-end: #1e293b; /* Slate 800 */
+  --bg-header-start: #00008F; /* AXA Corporate Blue */
+  --bg-header-end: #00005F; /* AXA Deep Navy */
   
-  --color-primary: #3b82f6; /* Blue 500 */
-  --color-primary-dark: #1d4ed8; /* Blue 700 */
-  --color-primary-light: #eff6ff; /* Blue 50 */
-  --color-primary-border: #bfdbfe; /* Blue 200 */
+  --color-primary: #00008F; /* AXA Blue */
+  --color-primary-dark: #000066; /* Darker AXA Blue */
+  --color-primary-light: #f0f3ff; /* Very soft light blue tint */
+  --color-primary-border: #cdd5ff; /* Soft blue border tint */
   
   --color-text-main: #0f172a; /* Slate 900 */
   --color-text-muted: #64748b; /* Slate 500 */
@@ -28,11 +28,11 @@
   --color-warning-text: #92400e; /* Amber 800 */
   --color-warning-accent: #f59e0b; /* Amber 500 */
   
-  /* Cores de Feedback - Urgência Alta / Perigo */
+  /* Cores de Feedback - Urgência Alta / Perigo (AXA Red) */
   --color-danger-bg: #fef2f2; /* Red 50 */
   --color-danger-border: #fecaca; /* Red 200 */
-  --color-danger-text: #991b1b; /* Red 800 */
-  --color-danger-accent: #ef4444; /* Red 500 */
+  --color-danger-text: #b30010; /* Dark AXA Red */
+  --color-danger-accent: #E0001B; /* AXA Red */
   
   /* Cores de Feedback - Urgência Crítica / Roxo */
   --color-critical-bg: #faf5ff; /* Purple 50 */
@@ -73,8 +73,8 @@
   :root {
     --bg-primary: #090d16; /* Midnight Slate */
     --bg-card: rgba(15, 23, 42, 0.85); /* Slate 900 transparent */
-    --bg-header-start: #020617; /* Darkest Slate */
-    --bg-header-end: #0f172a;
+    --bg-header-start: #01014d; /* Deep AXA Blue for Header */
+    --bg-header-end: #0a0a2c;
     
     --color-text-main: #f8fafc;
     --color-text-muted: #94a3b8; /* Slate 400 */
@@ -82,7 +82,12 @@
     
     --border-color: rgba(255, 255, 255, 0.08);
     --bg-input: #1e293b; /* Slate 800 */
-    --border-color-focus: #60a5fa;
+    --border-color-focus: #8080ff; /* Light AXA Blue */
+    
+    --color-primary: #4d4dff; /* Glowing AXA Blue */
+    --color-primary-dark: #3333e6;
+    --color-primary-light: rgba(77, 77, 255, 0.1);
+    --color-primary-border: rgba(77, 77, 255, 0.35);
     
     /* Shadows */
     --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
@@ -97,9 +102,10 @@
     --color-warning-border: rgba(217, 119, 6, 0.25);
     --color-warning-text: #fbbf24; /* Amber 400 */
     
-    --color-danger-bg: rgba(220, 38, 38, 0.1);
-    --color-danger-border: rgba(220, 38, 38, 0.25);
-    --color-danger-text: #f87171; /* Red 400 */
+    --color-danger-bg: rgba(255, 23, 33, 0.1); /* AXA Red */
+    --color-danger-border: rgba(255, 23, 33, 0.25);
+    --color-danger-text: #ff6b76; /* Glowing AXA Red */
+    --color-danger-accent: #ff1721; /* AXA Red */
     
     --color-critical-bg: rgba(147, 51, 234, 0.1);
     --color-critical-border: rgba(147, 51, 234, 0.25);
