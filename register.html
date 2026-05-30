@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- SEO Primary Meta Tags -->
+  <title>Volunteer Registration - Charity Bridge</title>
+  <meta name="description" content="Register as a volunteer on Charity Bridge. Share your skills, experience, and availability to help nonprofits with their technical and operational challenges." />
+  <meta name="keywords" content="volunteer registration, nonprofit volunteer, tech volunteer, charity help, skills donation, Charity Bridge" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Volunteer Registration - Charity Bridge" />
+  <meta property="og:description" content="Register as a volunteer and share your skills to help nonprofits in need." />
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo"><span role="img" aria-label="person raising hand">🙋</span></div>
+  <div style="flex-grow: 1;">
+    <h1>Volunteer Registration</h1>
+    <p>Share your skills and join our community of helpers</p>
+  </div>
+  <div id="volunteer-session-badge" style="display: none; align-items: center; gap: 8px; margin-right: 12px;"></div>
+  <div style="display: flex; gap: 12px;">
+    <a href="volunteer.html" class="btn-demo" style="text-decoration: none; border-color: rgba(255,255,255,0.4); background: transparent; color: white;">
+      <span role="img" aria-label="ticket">🎫</span> Browse Tickets
+    </a>
+    <a href="NGO Portal.html" class="btn-demo" style="text-decoration: none; border-color: rgba(255,255,255,0.4); background: transparent; color: white;">
+      <span role="img" aria-label="charity">🏢</span> Charity Portal
+    </a>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- Registration Form Section -->
+  <div id="registration-form-section">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div class="card-title"><span role="img" aria-label="clipboard">📋</span> Volunteer Registration</div>
+          <p class="card-subtitle" style="margin-bottom: 0;">
+            Tell us about yourself and your skills so we can match you with nonprofits that need your help.
+          </p>
+        </div>
+        <button class="btn-demo" onclick="fillRegistrationDemo()">
+          <span role="img" aria-label="sparkles">✨</span> Fill Example
+        </button>
+      </div>
+
+      <div class="form-grid">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="reg-name">Full Name <span class="optional">(required)</span></label>
+          <input type="text" id="reg-name" placeholder="e.g. Alex Johnson" autocomplete="name" />
+          <span class="error-message" id="error-reg-name"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="reg-email">Email Address <span class="optional">(required)</span></label>
+          <input type="email" id="reg-email" placeholder="e.g. alex@example.com" autocomplete="email" />
+          <span class="error-message" id="error-reg-email"></span>
+        </div>
+
+        <!-- Country -->
+        <div class="form-group">
+          <label for="reg-country">Country</label>
+          <select id="reg-country">
+            <option value="">Select your country</option>
+            <option value="United States">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Australia">Australia</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+            <option value="India">India</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Japan">Japan</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Experience Level -->
+        <div class="form-group">
+          <label>Experience Level</label>
+          <div class="urgency-group">
+            <div class="urgency-option">
+              <input type="radio" name="experience" value="beginner" id="exp-beginner" class="sr-only urgency-option" />
+              <label for="exp-beginner" class="urgency-label" style="background: var(--color-success-bg); border-color: var(--color-success-border); color: var(--color-success-text);">
+                Beginner
+              </label>
+            </div>
+            <div class="urgency-option">
+              <input type="radio" name="experience" value="intermediate" id="exp-intermediate" class="sr-only urgency-option" />
+              <label for="exp-intermediate" class="urgency-label" style="background: var(--color-warning-bg); border-color: var(--color-warning-border); color: var(--color-warning-text);">
+                Intermediate
+              </label>
+            </div>
+            <div class="urgency-option">
+              <input type="radio" name="experience" value="expert" id="exp-expert" class="sr-only urgency-option" />
+              <label for="exp-expert" class="urgency-label" style="background: var(--color-critical-bg); border-color: var(--color-critical-border); color: var(--color-critical-text);">
+                Expert
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="form-group full-width">
+          <label>Areas of Expertise</label>
+          <div class="skills-select-grid">
+            <label class="skill-checkbox-label">
+              <input type="checkbox" name="skills" value="cybersecurity" class="sr-only" />
+              <span class="skill-pill-selectable"><span role="img" aria-label="shield">🛡️</span> Cybersecurity</span>
+            </label>
+            <label class="skill-checkbox-label">
+              <input type="checkbox" name="skills" value="it-infrastructure" class="sr-only" />
+              <span class="skill-pill-selectable"><span role="img" aria-label="server">🖥️</span> IT Infrastructure</span>
+            </label>
+            <label class="skill-checkbox-label">
+              <input type="checkbox" name="skills" value="finance" class="sr-only" />
+              <span class="skill-pill-selectable"><span role="img" aria-label="money">💰</span> Finance & Accounting</span>
+            </label>
+            <label class="skill-checkbox-label">
+              <input type="checkbox" name="skills" value="software" class="sr-only" />
+              <span class="skill-pill-selectable"><span role="img" aria-label="code">💻</span> Software & CRM</span>
+            </label>
+            <label class="skill-checkbox-label">
+              <input type="checkbox" name="skills" value="communications" class="sr-only" />
+              <span class="skill-pill-selectable"><span role="img" aria-label="megaphone">📢</span> Communications</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Custom Skills -->
+        <div class="form-group full-width">
+          <label for="reg-custom-skills">Other Skills <span class="optional">(comma-separated)</span></label>
+          <input type="text" id="reg-custom-skills" placeholder="e.g. DevOps, AWS, Project Management" />
+        </div>
+
+        <!-- Bio -->
+        <div class="form-group full-width">
+          <label for="reg-bio">About You <span class="optional">(optional)</span></label>
+          <textarea id="reg-bio" rows="4" placeholder="Brief description of your background and why you want to help nonprofits..."></textarea>
+        </div>
+      </div>
+
+      <button id="register-btn" class="btn-analyze" onclick="registerVolunteer()">
+        <span id="reg-spinner" class="spinner"></span>
+        <span id="reg-btn-text">Register & Save Profile</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Profile View Section (hidden by default) -->
+  <div id="profile-view-section" style="display: none;">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px;">
+        <div class="card-title" style="margin-bottom: 0;"><span role="img" aria-label="person">👤</span> Your Volunteer Profile</div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-demo" onclick="editProfile()">
+            <span role="img" aria-label="pencil">✏️</span> Edit
+          </button>
+          <button class="btn-demo" onclick="logoutVolunteer()" style="color: var(--color-danger-accent); border-color: var(--color-danger-border);">
+            <span role="img" aria-label="logout">🚪</span> Sign Out
+          </button>
+        </div>
+      </div>
+      <div id="profile-content"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer style="text-align: center; padding: 40px 20px; color: var(--color-text-muted); font-size: 13px; border-top: 1px solid var(--border-color); background: white;">
+  <p>&copy; 2026 Charity Bridge. Empowering social impact through technology and collaboration.</p>
+</footer>
+
+</body>
+</html>

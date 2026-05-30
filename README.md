@@ -21,7 +21,7 @@ The platform consists of four unified visual portals, fully styled using a centr
 
 - **Single Source of Truth (`style.css`)**: 100% of all UI layouts, card shapes, buttons, alert boxes, and transitions are loaded strictly from a single central stylesheet using custom HSL colors and flexible flexbox/grid metrics.
 - **Local AI Triage (`app.js`)**: Real-time semantic keyword regex parsing predicts categories (Cybersecurity, IT Infrastructure, Finance, Software, Comms) instantly when the "Let AI decide" option is selected.
-- **localStorage Database Sync**: Highly performant database simulation. Newly submitted tickets instantly prepend to the volunteer dashboard queue, and task claiming updates volunteer stats globally in real-time.
+- **SQLite (sql.js) + IndexedDB**: Production-grade WASM-backed SQLite database with IndexedDB binary persistence (async, non-blocking, ~50%+ of disk quota). Features a multi-table relational schema (ngos, volunteers, tickets, categories) with foreign key constraints, indexed queries, and a `PRAGMA user_version`-based migration engine for future-proof schema evolution. Automatic localStorage-to-IndexedDB migration with fallback support.
 - **WCAG 2.1 AA A11y Standards**: Visually accessible hidden radio controls (`.sr-only`), strict keyboard focus outlines (`:focus-visible`), and descriptive `aria-label` tags wrapped on all visual elements.
 - **Vercel & GitHub Deployment Ready**: Fully optimized with paths, configurations, and a custom `vercel.json` file to support clean URL routing (`cleanUrls: true`) in production.
 

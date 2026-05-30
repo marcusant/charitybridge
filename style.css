@@ -72,50 +72,65 @@
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-primary: #090d16; /* Midnight Slate */
-    --bg-card: rgba(15, 23, 42, 0.85); /* Slate 900 transparent */
-    --bg-header-start: #01014d; /* Deep AXA Blue for Header */
+    --bg-primary: #0a0e1a;
+    --bg-card: #141b2d;
+    --bg-header-start: #111144;
     --bg-header-end: #0a0a2c;
     
-    --color-text-main: #f8fafc;
-    --color-text-muted: #94a3b8; /* Slate 400 */
-    --color-text-dark: #cbd5e1; /* Slate 300 */
+    --color-text-main: #f1f5f9;
+    --color-text-muted: #94a3b8;
+    --color-text-dark: #e2e8f0;
     
-    --border-color: rgba(255, 255, 255, 0.08);
-    --bg-input: #1e293b; /* Slate 800 */
-    --border-color-focus: #8080ff; /* Light AXA Blue */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --bg-input: #1e293b;
+    --border-color-focus: #818cf8;
     
-    --color-primary: #4d4dff; /* Glowing AXA Blue */
-    --color-primary-dark: #3333e6;
-    --color-primary-light: rgba(77, 77, 255, 0.1);
-    --color-primary-border: rgba(77, 77, 255, 0.35);
+    --color-primary: #818cf8;
+    --color-primary-dark: #6366f1;
+    --color-primary-light: rgba(129, 140, 248, 0.12);
+    --color-primary-border: rgba(129, 140, 248, 0.3);
     
-    /* Shadows */
-    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
     
-    /* Dark Mode Urgencies - Luminescent for high contrast */
-    --color-success-bg: rgba(22, 163, 74, 0.1);
-    --color-success-border: rgba(22, 163, 74, 0.25);
-    --color-success-text: #4ade80; /* Green 400 */
+    --color-success-bg: rgba(22, 163, 74, 0.12);
+    --color-success-border: rgba(22, 163, 74, 0.3);
+    --color-success-text: #4ade80;
     
-    --color-warning-bg: rgba(217, 119, 6, 0.1);
-    --color-warning-border: rgba(217, 119, 6, 0.25);
-    --color-warning-text: #fbbf24; /* Amber 400 */
+    --color-warning-bg: rgba(217, 119, 6, 0.12);
+    --color-warning-border: rgba(217, 119, 6, 0.3);
+    --color-warning-text: #fbbf24;
     
-    --color-danger-bg: rgba(255, 23, 33, 0.1); /* AXA Red */
-    --color-danger-border: rgba(255, 23, 33, 0.25);
-    --color-danger-text: #ff6b76; /* Glowing AXA Red */
-    --color-danger-accent: #ff1721; /* AXA Red */
+    --color-danger-bg: rgba(255, 23, 33, 0.12);
+    --color-danger-border: rgba(255, 23, 33, 0.3);
+    --color-danger-text: #ff6b76;
+    --color-danger-accent: #ff1721;
     
-    --color-critical-bg: rgba(147, 51, 234, 0.1);
-    --color-critical-border: rgba(147, 51, 234, 0.25);
-    --color-critical-text: #c084fc; /* Purple 400 */
+    --color-critical-bg: rgba(147, 51, 234, 0.12);
+    --color-critical-border: rgba(147, 51, 234, 0.3);
+    --color-critical-text: #c084fc;
   }
 
-  /* Dark Mode element styling */
+  body {
+    background: 
+      radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.06) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(192, 132, 252, 0.06) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(74, 222, 128, 0.03) 0px, transparent 50%),
+      var(--bg-primary);
+  }
+
+  .card {
+    border-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   input, select, textarea {
-    color: white;
+    color: #f1f5f9;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    background: #1e293b;
   }
   
   .filter-btn {
@@ -139,34 +154,145 @@
     border-color: var(--color-primary) !important;
   }
   
-  .flowchart-node {
-    background: #1e293b !important;
-    color: #f8fafc !important;
+  .detail-contact-box {
+    background: rgba(30, 41, 59, 0.7) !important;
+  }
+  
+  .info-block {
+    background: rgba(30, 41, 59, 0.7) !important;
   }
   
   .detail-contact-box {
     background: rgba(30, 41, 59, 0.5) !important;
   }
   
+  .card-title {
+    color: #818cf8 !important;
+  }
+  
+  .results-header h2 {
+    color: #818cf8 !important;
+  }
+  
   .info-block {
-    background: rgba(30, 41, 59, 0.5) !important;
+    background: rgba(30, 41, 59, 0.7) !important;
+  }
+  
+  .info-block p, .info-block li {
+    color: #cbd5e1 !important;
   }
   
   .selfhelp-block {
-    background: rgba(30, 41, 59, 0.5) !important;
+    background: rgba(30, 41, 59, 0.7) !important;
   }
   
   .ticket-block {
-    background: rgba(15, 23, 42, 0.6) !important;
+    background: rgba(30, 41, 59, 0.7) !important;
+  }
+  
+  .ticket-id-box {
+    background: #1e293b !important;
+    border-color: var(--border-color) !important;
+  }
+  
+  .ticket-id-box .ticket-id {
+    color: #818cf8 !important;
   }
   
   .resource-card {
-    background: #0f172a !important;
-    border-color: var(--border-color) !important;
+    background: #1e293b !important;
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+  
+  .resource-card h5 {
+    color: #f1f5f9 !important;
+  }
+  
+  .volunteer-card {
+    background: #1e293b !important;
+    border-color: rgba(255,255,255,0.08) !important;
+  }
+  
+  .volunteer-card:hover {
+    border-color: var(--color-primary-border) !important;
+  }
+  
+  .volunteer-info h5 {
+    color: #f1f5f9 !important;
+  }
+  
+  .ticket-block h4 {
+    color: #818cf8 !important;
+  }
+  
+  .btn-demo {
+    background: #1e293b !important;
+    color: #818cf8 !important;
+    border-color: rgba(129, 140, 248, 0.3) !important;
+  }
+  
+  .btn-demo:hover {
+    background: rgba(129, 140, 248, 0.1) !important;
+    color: #a5b4fc !important;
+    border-color: #818cf8 !important;
   }
   
   .presentation-col-card {
     background: rgba(15, 23, 42, 0.6) !important;
+  }
+
+  .stat-number, .feed-title, .ticket-feed-ngo {
+    color: #818cf8 !important;
+  }
+
+  .splash-card h3 {
+    color: #818cf8 !important;
+  }
+
+  .detail-section-title, .modal-ngo-name {
+    color: #818cf8 !important;
+  }
+
+  .urgency-label {
+    border-color: rgba(255,255,255,0.15);
+    color: #e2e8f0;
+  }
+
+  .urgency-label:hover {
+    background: rgba(255,255,255,0.05);
+  }
+
+  .slide-title, .presentation-col-card h4 {
+    color: #818cf8 !important;
+  }
+
+  .slide-btn {
+    background: #1e293b;
+    border-color: rgba(255,255,255,0.12);
+    color: #e2e8f0;
+  }
+
+  .slide-btn:hover:not(:disabled) {
+    background: rgba(255,255,255,0.08);
+  }
+
+  .slide-progress {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .splash-card {
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  .presentation-highlight {
+    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .flowchart-node {
+    background: #1e293b !important;
+    color: #e2e8f0 !important;
   }
 }
 
@@ -1737,7 +1863,7 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
 /* Splash Landing Hub Specific Styles */
 .splash-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
   margin-top: 32px;
 }
@@ -1800,6 +1926,517 @@ input.is-invalid:focus, textarea.is-invalid:focus, select.is-invalid:focus {
 .splash-card .btn-apply {
   margin-top: auto;
   pointer-events: none; /* Make click trigger the link card itself */
+}
+
+/* ==========================================================================
+   Volunteer Registration Page Styles
+   ========================================================================== */
+
+.skills-select-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.skill-checkbox-label {
+  cursor: pointer;
+}
+
+.skill-checkbox-label input:checked + .skill-pill-selectable {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+  box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+.skill-checkbox-label input:focus-visible + .skill-pill-selectable {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+  outline: 2px solid var(--color-primary);
+}
+
+.skill-pill-selectable {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--border-color);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  background: var(--bg-input);
+  transition: var(--transition-fast);
+  user-select: none;
+}
+
+.skill-pill-selectable:hover {
+  border-color: var(--color-primary-border);
+  background: var(--color-primary-light);
+}
+
+/* Profile View Styles */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-avatar-large {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-family-headings);
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name {
+  font-family: var(--font-family-headings);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--bg-header-start);
+  line-height: 1.2;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.profile-country {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.profile-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.profile-detail-item {
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+}
+
+.profile-detail-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.profile-detail-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.profile-bio {
+  margin-bottom: 24px;
+}
+
+.profile-bio p {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  margin-top: 4px;
+}
+
+.profile-skills {
+  margin-bottom: 24px;
+}
+
+.profile-skills .skills-list {
+  margin-top: 8px;
+}
+
+.profile-claims {
+  margin-top: 8px;
+}
+
+.profile-claims-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.profile-claim-item {
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  transition: var(--transition-fast);
+}
+
+.profile-claim-item:hover {
+  border-color: var(--color-primary-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-claim-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.profile-claim-ngo {
+  font-family: var(--font-family-headings);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bg-header-start);
+}
+
+.profile-claim-desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.profile-claim-hours {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+  border: 1px solid var(--color-success-border);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-family-headings);
+}
+
+.profile-no-claims {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+.profile-no-claims a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Availability Range Slider
+   ========================================================================== */
+
+.availability-slider-container {
+  background: var(--bg-input);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px 24px 16px;
+  transition: var(--transition-normal);
+}
+
+.availability-slider-container:hover {
+  border-color: var(--color-primary-border);
+}
+
+.availability-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--color-success-accent), var(--color-warning-accent), var(--color-danger-accent));
+  outline: none;
+  cursor: pointer;
+}
+
+/* Hide default browser numbers/ticks */
+.availability-slider::-webkit-slider-runnable-track {
+  height: 8px;
+}
+
+.availability-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 4px var(--color-primary-light);
+  cursor: grab;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  margin-top: -10px;
+}
+
+.availability-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2), 0 0 0 6px var(--color-primary-light);
+}
+
+.availability-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 0 0 8px rgba(59, 130, 246, 0.15);
+}
+
+.availability-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 4px var(--color-primary-light);
+  cursor: grab;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.availability-slider::-moz-range-thumb:hover {
+  transform: scale(1.12);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2), 0 0 0 6px var(--color-primary-light);
+}
+
+.availability-slider::-moz-range-thumb:active {
+  cursor: grabbing;
+}
+
+.availability-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(59, 130, 246, 0.4);
+  outline: 2px solid var(--color-primary);
+}
+
+/* Hide all native range output/numbers */
+.availability-slider::-webkit-slider-runnable-track,
+.availability-slider::-moz-range-track {
+  height: 8px;
+}
+
+/* Hide browser native tooltip/numbers */
+.availability-slider::-webkit-slider-thumb,
+.availability-slider::-moz-range-thumb {
+  position: relative;
+}
+
+.availability-slider::-webkit-media-slider-thumb,
+.availability-slider::slider-thumb,
+.availability-slider::-webkit-slider-container,
+.availability-slider::-webkit-slider-runnable-track::-webkit-slider-thumb {
+  display: none;
+}
+
+datalist,
+output,
+option {
+  display: none !important;
+}
+
+.availability-value-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--color-primary-light), rgba(59, 130, 246, 0.08));
+  border: 1.5px solid var(--color-primary-border);
+  border-radius: var(--radius-full);
+  padding: 10px 20px;
+  margin-bottom: 16px;
+  transition: var(--transition-fast);
+}
+
+.availability-value-badge.pulse {
+  animation: badgePulse 0.3s ease;
+}
+
+@keyframes badgePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* Dark mode slider */
+@media (prefers-color-scheme: dark) {
+  .availability-slider-container {
+    background: #1e293b;
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  .availability-value-badge {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.12), rgba(129, 140, 248, 0.06));
+    border-color: rgba(129, 140, 248, 0.3);
+  }
+
+  .availability-slider::-webkit-slider-thumb {
+    background: #1e293b;
+    border-color: #818cf8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(129, 140, 248, 0.2);
+  }
+
+  .availability-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 0 6px rgba(129, 140, 248, 0.25);
+  }
+
+  .availability-slider::-moz-range-thumb {
+    background: #1e293b;
+    border-color: #818cf8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(129, 140, 248, 0.2);
+  }
+
+  #availability-value {
+    color: #a5b4fc;
+  }
+}
+
+/* ==========================================================================
+   Hours Selection Buttons (Ticket Claim Modal)
+   ========================================================================== */
+
+.hours-select-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hours-btn {
+  padding: 8px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  font-family: var(--font-family-headings);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  user-select: none;
+}
+
+.hours-btn:hover {
+  border-color: var(--color-primary-border);
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.hours-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 143, 0.2);
+}
+
+.hours-custom-input {
+  width: 80px;
+  padding: 8px 12px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  background: var(--bg-input);
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.hours-custom-input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.hours-custom-input::placeholder {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+/* Dark mode hours buttons */
+@media (prefers-color-scheme: dark) {
+  .hours-btn {
+    background: #1e293b;
+    border-color: rgba(255,255,255,0.12);
+    color: #e2e8f0;
+  }
+
+  .hours-btn:hover {
+    border-color: rgba(129, 140, 248, 0.4);
+    background: rgba(129, 140, 248, 0.1);
+    color: #a5b4fc;
+  }
+
+  .hours-btn.active {
+    background: #818cf8;
+    border-color: #818cf8;
+    color: #0f172a;
+  }
+
+  .hours-custom-input {
+    background: #1e293b;
+    border-color: rgba(255,255,255,0.12);
+    color: #f1f5f9;
+  }
+
+  .hours-custom-input:focus {
+    border-color: #818cf8;
+  }
+}
+
+/* Dark mode additions for registration */
+@media (prefers-color-scheme: dark) {
+  .skill-pill-selectable {
+    background: #1e293b;
+    border-color: rgba(255,255,255,0.15);
+    color: #e2e8f0;
+  }
+
+  .skill-checkbox-label input:checked + .skill-pill-selectable {
+    background: rgba(129, 140, 248, 0.15);
+    border-color: var(--color-primary);
+    color: #a5b4fc;
+  }
+
+  .profile-avatar-large {
+    box-shadow: var(--shadow-md);
+  }
+
+  .profile-name {
+    color: #818cf8 !important;
+  }
+
+  .profile-claim-ngo {
+    color: #818cf8 !important;
+  }
+
+  .profile-detail-item,
+  .profile-claim-item,
+  .profile-bio p {
+    background: rgba(30, 41, 59, 0.7) !important;
+  }
 }
 
 

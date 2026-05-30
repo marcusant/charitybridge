@@ -24,6 +24,9 @@
     <p>Claim support tickets and donate your expertise to nonprofits in need</p>
   </div>
   <div style="display: flex; gap: 12px;">
+    <a href="register.html" class="btn-demo" style="text-decoration: none; border-color: rgba(255,255,255,0.4); background: transparent; color: white;">
+      <span role="img" aria-label="person">👤</span> My Profile
+    </a>
     <a href="presentation.html" class="btn-demo" style="text-decoration: none; border-color: rgba(255,255,255,0.4); background: transparent; color: white;">
       <span role="img" aria-label="project presentation screen">📺</span> Project Presentation
     </a>
@@ -173,6 +176,20 @@
 
     <!-- Modal Footer -->
     <div class="modal-footer stagger-item delay-5">
+      <div id="modal-hours-section" style="margin-bottom: 16px;">
+        <label style="font-size: 13px; font-weight: 600; color: var(--color-text-dark); margin-bottom: 8px; display: block;">
+          <span role="img" aria-label="clock">🕐</span> Hours you can dedicate to this ticket
+        </label>
+        <div class="hours-select-row">
+          <button type="button" class="hours-btn" data-hours="1" onclick="selectHours(1)">1h</button>
+          <button type="button" class="hours-btn" data-hours="2" onclick="selectHours(2)">2h</button>
+          <button type="button" class="hours-btn active" data-hours="4" onclick="selectHours(4)">4h</button>
+          <button type="button" class="hours-btn" data-hours="8" onclick="selectHours(8)">8h</button>
+          <button type="button" class="hours-btn" data-hours="16" onclick="selectHours(16)">16h</button>
+          <input type="number" id="modal-hours-custom" class="hours-custom-input" placeholder="Custom" min="1" max="200" oninput="selectCustomHours(this.value)" />
+        </div>
+        <input type="hidden" id="modal-hours-value" value="4" />
+      </div>
       <button 
         type="button" 
         class="btn-analyze modal-claim-btn" 
@@ -186,6 +203,7 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

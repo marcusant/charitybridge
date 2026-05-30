@@ -6,9 +6,9 @@ This file serves as the real-time status dashboard for the development of the **
 
 ## 📊 Overall Project Status
 
-*   **Current Phase**: `Phase 5: GitHub Integration & Vercel Deployment`
+*   **Current Phase**: `Phase 7: Volunteer Registration Page`
 *   **Estimated Progress**: `100%`
-*   **Last Updated**: `2026-05-29`
+*   **Last Updated**: `2026-05-30`
 
 ---
 
@@ -74,9 +74,55 @@ This file serves as the real-time status dashboard for the development of the **
 
 ---
 
+### 🗄️ Phase 6: SQLite Integration Enhancement
+*   [x] **Task 6.1**: Multi-Table Schema with Migration System `[Completed]`
+    *   *Goal*: Replace single `tickets` table with normalized schema (ngos, volunteers, tickets, categories) with foreign keys, indices, and `PRAGMA user_version`-based migration engine.
+*   [x] **Task 6.2**: IndexedDB Persistence Layer `[Completed]`
+    *   *Goal*: Replace localStorage with IndexedDB for async, non-blocking binary persistence. Debounced writes (500ms). Automatic localStorage-to-IndexedDB migration with fallback.
+*   [x] **Task 6.3**: Data Model Expansion `[Completed]`
+    *   *Goal*: Seed categories and volunteers tables from scenarios object. Refactor ticket creation to use ngo_id FK. Update all queries with JOIN operations.
+*   [x] **Task 6.4**: Error Handling & Reliability `[Completed]`
+    *   *Goal*: Wrap all DB operations in try/catch with console logging and fallback values. Add DB health-check on page load.
+
+---
+
+### 🙋 Phase 7: Volunteer Registration Page
+*   [x] **Task 7.1**: Database Schema & Profile CRUD `[Completed]`
+    *   *Goal*: Extend volunteers table (v3 migration) with email, country, bio, availability, experience_level, custom_skills, is_registered columns. Add claimed_by_email to tickets.
+*   [x] **Task 7.2**: Volunteer Profile Functions `[Completed]`
+    *   *Goal*: Implement saveVolunteerProfile, getVolunteerProfile, getRegisteredVolunteers, getClaimedTicketsByEmail functions.
+*   [x] **Task 7.3**: Session Management `[Completed]`
+    *   *Goal*: Add setActiveVolunteer, getActiveVolunteer, clearActiveVolunteer using localStorage. Update claimTicketFromModal to link volunteer identity.
+*   [x] **Task 7.4**: Registration Page HTML `[Completed]`
+    *   *Goal*: Create register.html with form (name, email, country, experience, availability, skills, bio), profile view, and claimed tickets list.
+*   [x] **Task 7.5**: CSS Styling `[Completed]`
+    *   *Goal*: Add skill pill selectable styles, profile card layout, profile detail grid, claimed tickets list, dark mode support.
+*   [x] **Task 7.6**: Platform Integration `[Completed]`
+    *   *Goal*: Add nav links to register.html from all portals. Add 4th splash card to landing page. Update splash grid to auto-fit layout.
+
+---
+
 ## 🪵 Delivery Log (Activity History)
 
 *(Completed activities are logged here in reverse chronological order).*
+*   **2026-05-30** *(update 1)*:
+    *   **Completed Phase 7: Volunteer Registration Page**:
+        *   **JS `app.js`**: Added v3 schema migration extending `volunteers` table with `email`, `country`, `bio`, `availability`, `experience_level`, `custom_skills`, `is_registered` columns. Added `claimed_by_email` to tickets table.
+        *   **JS `app.js`**: Implemented profile CRUD functions (`saveVolunteerProfile`, `getVolunteerProfile`, `getRegisteredVolunteers`, `getClaimedTicketsByEmail`).
+        *   **JS `app.js`**: Added session management (`setActiveVolunteer`, `getActiveVolunteer`, `clearActiveVolunteer`) using localStorage. Updated `claimTicketFromModal()` to link volunteer identity and display name in toast.
+        *   **HTML `register.html`**: Created full registration page with form (name, email, country, experience level radio, availability radio, skills multi-select, custom skills, bio), profile view with avatar, detail grid, skills display, and claimed tickets list.
+        *   **CSS `style.css`**: Added `.skill-pill-selectable`, `.skill-checkbox-label`, `.profile-avatar-large`, `.profile-header`, `.profile-detail-grid`, `.profile-claims-list` styles with dark mode support. Updated `.splash-grid` to `auto-fit` for 4-card layout.
+        *   **HTML**: Updated nav headers in `NGO Portal.html`, `volunteer.html`, `presentation.html` with register/profile links. Added 4th splash card to `index.html`.
+*   **2026-05-29** *(update 4)*:
+    *   **Completed Phase 6: SQLite Integration Enhancement**:
+        *   **JS `app.js`**: Replaced single `tickets` table with normalized 4-table schema (`ngos`, `volunteers`, `tickets`, `categories`) with foreign key constraints and indices.
+        *   **JS `app.js`**: Added `PRAGMA user_version`-based migration engine for safe schema evolution (v1→v2 auto-migration of existing localStorage data).
+        *   **JS `app.js`**: Replaced localStorage persistence with IndexedDB adapter — async, non-blocking writes with 500ms debounce. localStorage used as fallback.
+        *   **JS `app.js`**: IndexedDB-first loading with automatic localStorage-to-IndexedDB migration on first load.
+        *   **JS `app.js`**: Seeded `categories` table from scenarios keywords and `volunteers` table from scenario volunteer data.
+        *   **JS `app.js`**: Refactored `addTicket()` to resolve/create NGO records and use `ngo_id` FK. `getStoredTickets()` uses JOIN queries to return backward-compatible object shape.
+        *   **JS `app.js`**: Wrapped all DB operations in try/catch with console error logging and fallback return values. Added `checkDbHealth()` verification on init.
+        *   **JS `app.js`**: Updated flowchart simulation text to reference SQLite/IndexedDB instead of localStorage.
 *   **2026-05-29** *(update 3)*:
     *   **Fixed Volunteer Portal — Completely removed legacy duplicate JS block and resolved modal backdrop activation** (Fixes: layout overlapping, overlay click handling, backdrop aesthetics, visual animation staggers):
         *   **JS `app.js`**: Purged the redundant split-pane event handlers and helper functions, guaranteeing that `selectTicket()` executes the premium modal layout code.

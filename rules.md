@@ -69,7 +69,8 @@ Script code must be clean, modular, and free of redundancies.
     *   **Prohibited**: Using native `alert()` for mandatory field validation.
     *   **Solution**: Implement inline feedback messages directly below the affected inputs and style visual validation classes.
 *   **Local Persistence**:
-    *   Use `localStorage` to simulate a local database where actions taken on the NGO portal (such as creating a ticket) instantly reflect on the volunteer portal.
+    *   Use `SQLite (sql.js WASM)` with `IndexedDB` binary persistence as the primary local database. Actions taken on the NGO portal (such as creating a ticket) instantly reflect on the volunteer portal via shared relational tables.
+    *   `localStorage` is retained as a fallback storage mechanism only.
 *   **Verification Links**:
     *   **Mandatory**: At the end of each response involving the creation or modification of visible files (HTML pages), the AI assistant must provide absolute clickable links in the `file:///` format to allow the user to immediately test and verify the result locally.
 
